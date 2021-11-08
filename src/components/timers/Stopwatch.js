@@ -1,88 +1,39 @@
-import React from "react";
-import { StopWatchTimerDisplay } from "../generic/TimerDisplay";
+import {StopWatchTimerDisplay} from "../generic/TimerDisplay";
 import StopWatchButtons from "../generic/StopWatchButtons";
-import { Container, getIntervalTimer } from "../../utils/helpers";
+import {Container} from "../../utils/helpers";
 
+import {CountProvider} from "../../mycontext/MyContexts";
+import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 // align text in a grid
 const ButtonPosition = {
-  /* The size of the buttons passed */
-  fontSize: "20px",
-  borderRadius: "20%"
+    /* The size of the buttons passed */
+    fontSize: "20px",
+    borderRadius: "20%"
 
 };
+export const H = () => {
+};
 
-class Stopwatch extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      hours: 0,
-      minutes: 0,
-      seconds: 0
-    };
-    this.incrementer = null;
-  }
-
-
-  callbackFunction = (childData) => {
-
-    this.setState({ buttonPressed: childData });
-    console.log(childData.toString());
-    switch (childData.toString()) {
-      case "startButton":
-        this.stopWatchtimer = getIntervalTimer(this.countUp);
-        break;
-      case "stopButton":
-        clearInterval(this.stopWatchtimer);
-        break;
-      case "resetButton":
-        this.setState({
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        });
-        ;
-        clearInterval(this.stopWatchtimer);
-        break;
-      default:
-        break;
-    }
-
-  };
-  countUp = () => {
-    this.setState({ seconds: this.state.seconds + 1 });
-    const { hours, minutes, seconds } = this.state;
-    if (seconds === 59) {
-      this.setState({ minutes: this.state.minutes + 1 });
-      this.setState({ seconds: 0 });
-
-    }
-    if (minutes === 59) {
-      this.setState({ hours: this.state.minutes + 1 });
-      this.setState({ minutes: 0 });
-    }
-    //when the clock have reach "00:00:00" clear the interval timer
-    if (hours === 0 && minutes === 0 && seconds === 0) {
-      clearInterval(this.stopWatchtimer);
-    }
-
-  };
-
-
-  render() {
-    const { hours, minutes, seconds } = this.state;
+function App() {
 
     return (
 
-      <Container style={this.props.style}>
+        <CountProvider>
+            <Container>
+                <StopWatchTimerDisplay/>
+                <StopWatchButtons/>
+            </Container>
 
-        <StopWatchTimerDisplay style={ButtonPosition} hrs={hours} mins={minutes} secs={seconds} />
-        <div style={ButtonPosition}>
-
-          <StopWatchButtons parentCallback={this.callbackFunction} style={ButtonPosition} />
-        </div>
-      </Container>
+        </CountProvider>
     );
-  }
-}
+};
 
-export default Stopwatch;
+ReactDOM.render(
+    <App/>,
+
+    document.getElementById('root')
+);
+
+
+export default App;

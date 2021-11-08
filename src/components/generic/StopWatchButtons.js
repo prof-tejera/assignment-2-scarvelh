@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import Button from "./Button";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import {StopContext} from "../../mycontext/MyContexts";
 
 
 const Container = styled.div`
@@ -11,21 +12,19 @@ const Container = styled.div`
 `;
 // align text in a grid
 const positionButtons = {
-  display: "flex",
-  justifyContent: "space-between",
-  width: "10rem",
-  borderRadius: "20%",
-  alignItems: "center",
-  //padding: "40px",
-  //float: "right",
-  fontSize: "20px",
-  paddingLeft: "5px",
-  justifyItems: "center"
+    display: "flex",
+    justifyContent: "space-between",
+    width: "10rem",
+    borderRadius: "20%",
+    alignItems: "center",
+    //padding: "40px",
+    //float: "right",
+    fontSize: "20px",
+    paddingLeft: "5px",
+    justifyItems: "center"
 
 };
-
-class StopWatchButtons extends React.Component {
-  state = {
+const State = {
     // start cornflowerblue
     backgroundColor: "#6488ea",
     fontSize: "20px",
@@ -33,56 +32,51 @@ class StopWatchButtons extends React.Component {
     //border: ".1rem red solid",
     borderRadius: "20%",
     float: "top",
-    disabled:false,
-  };
+    disabled: false,
+};
 
-  handleStart = () => {
-    this.setState({disabled:true});
+const HandleStart = () => {
 
-    this.props.parentCallback("startButton");
+    //const {CallBackParent} = useContext(StopContext)
+
+
 
     console.log("Button Start have been clicked");
-    this.setState({ backgroundColor: "green" });
 
-  };
-  handleStop = () => {
+
+};
+const HandleStop = () => {
     console.log("Button Stop have been clicked");
-    this.props.parentCallback("stopButton");
-    this.setState({ backgroundColor: "red" });
-  };
-  handleReset = () => {
+   // this.props.parentCallback("stopButton");
+    //this.setState({backgroundColor: "red"});
+};
+const HandleReset = () => {
     console.log("Button Reset have been clicked");
-    this.props.parentCallback("resetButton");
-    this.setState({ backgroundColor: "#6488ea" });
-  };
+    //this.props.parentCallback("resetButton");
+    //this.setState({backgroundColor: "#6488ea"});
+};
 
-
-  render() {
-
+//class StopWatchButtons extends React.Component {
+const StopWatchButtons = () => {
+    const {CallBackParent} = useContext(StopContext)
     return (
-      <Container>
-        <div style={positionButtons}>
-          <Button text={"Start"} onClick={() => {
 
-            this.handleStart();
-          } } style={this.props.style} disabled={this.state.disabled}/>
-          <Button text="Stop" onClick={() => {
-            this.handleStop();
-          }} style={this.state} />
-          <Button text="Reset" onClick={() => {
-            this.handleReset();
-          }} style={this.props.style} />
-        </div>
-      </Container>
+        <Container>
+            <div style={positionButtons}>
+                <Button text={"Start"} onClick={() => CallBackParent("startButton")}
+                />
+                <Button text={"Stop"} onClick={() => {
+                    HandleStop();
+                }}/>
+                <Button text={"Reset"} onClick={() => {
+                    HandleReset();
+                }}/>
+            </div>
+        </Container>
+
 
     );
-  }
+
 }
 
-StopWatchButtons.propTypes = {
-  text: PropTypes.string,
-  style: PropTypes.object,
-  onClick: PropTypes.func,
-  props: PropTypes.object
-};
 export default StopWatchButtons;
