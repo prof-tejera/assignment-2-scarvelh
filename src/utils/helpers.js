@@ -42,3 +42,21 @@ export const Container = styled.div`
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16), 0 4px 6px rgba(0, 0, 0, 0.45);
 
 `;
+// from
+export function secondsToTime(secs)
+{
+  var hours = Math.floor(secs / (60 * 60));
+
+  var divisor_for_minutes = secs % (60 * 60);
+  var minutes = Math.floor(divisor_for_minutes / 60);
+
+  var divisor_for_seconds = divisor_for_minutes % 60;
+  var seconds = Math.ceil(divisor_for_seconds);
+
+  var timerObject = {
+    "hours": hours,
+    "minutes": minutes,
+    "seconds": seconds
+  };
+  return timerObject;
+}

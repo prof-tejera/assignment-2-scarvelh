@@ -1,8 +1,7 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import Button from "./Button";
 import styled from "styled-components";
-import PropTypes from "prop-types";
-import {StopContext} from "../../mycontext/MyContexts";
+import {StopContext, useInterval} from "../../mycontext/MyContexts";
 
 
 const Container = styled.div`
@@ -35,43 +34,42 @@ const State = {
     disabled: false,
 };
 
-const HandleStart = () => {
-
-    //const {CallBackParent} = useContext(StopContext)
 
 
-
-    console.log("Button Start have been clicked");
-
-
-};
-const HandleStop = () => {
-    console.log("Button Stop have been clicked");
-   // this.props.parentCallback("stopButton");
-    //this.setState({backgroundColor: "red"});
-};
-const HandleReset = () => {
-    console.log("Button Reset have been clicked");
-    //this.props.parentCallback("resetButton");
-    //this.setState({backgroundColor: "#6488ea"});
-};
 
 //class StopWatchButtons extends React.Component {
 const StopWatchButtons = () => {
-    const {CallBackParent} = useContext(StopContext)
+
+    const {seconds,setSeconds,CallBackParent} = useContext(StopContext)
+
+    let [intervalId, setIntervalId] = useState(0);
+
     return (
 
         <Container>
             <div style={positionButtons}>
-                <Button text={"Start"} onClick={() => CallBackParent("startButton")}
-                />
+
+                <Button text={"Start"} onClick={() => {
+
+                    setIntervalId(setInterval(() => {  setSeconds(seconds =>seconds + 1)}, 1000))
+
+
+                }
+                }
+                disabled={true}/>
                 <Button text={"Stop"} onClick={() => {
-                    HandleStop();
+                    clearInterval(intervalId);
+                    intervalId = null;
                 }}/>
                 <Button text={"Reset"} onClick={() => {
-                    HandleReset();
+                    clearInterval(intervalId);
+                    setSeconds(seconds =>0);
+                    intervalId = null;
                 }}/>
             </div>
+
+
+
         </Container>
 
 

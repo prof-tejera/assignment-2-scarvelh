@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
@@ -19,22 +19,25 @@ const Container = styled.div`
 class Button extends Component {
 
 
-  render() {
+    render() {
 
 
-    return (
-    <Container onClick={() => this.props.onClick(this.props.value)} text={this.props.text} style={this.props.style} disabled={this.props.disabled} >
-      {this.props.value}
-      {this.props.text}
-    </Container>
-    )
-  }
+        return (
+            <Container onClick={() => this.props.onClick(this.props.value)} text={this.props.text}
+                       style={this.props.style} disabled={this.props.disabled}>
+
+                {this.props.value}
+                {this.props.text}
+            </Container>
+        )
+    }
 
 }
+
 Button.propTypes = {
-  text: PropTypes.string,
-  style: PropTypes.object,
-  onClick: PropTypes.func,
+    text: PropTypes.string,
+    style: PropTypes.object,
+    onClick: PropTypes.func,
 
 };
 export default Button;
