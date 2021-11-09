@@ -1,7 +1,6 @@
-import React, {useContext, useEffect} from "react";
-import PropTypes from "prop-types";
-import {StopContext} from "../../mycontext/MyContexts";
-import {secondsToTime} from "../../utils/helpers";
+import React, {useContext} from "react";
+import {CountDownContext, StopContext} from "../../mycontext/MyContexts";
+import {convertToSeconds, secondsToTime} from "../../utils/helpers";
 
 const timerFormat = {
     margin: "20px",
@@ -31,7 +30,7 @@ export function StopWatchTimerDisplay() {
     // let minutes = 0;
     // let seconds = 0;
     // Calculate Minutes and hours
-let convertSeconds = secondsToTime(seconds)
+    let convertSeconds = secondsToTime(seconds)
 
     return (
 
@@ -51,6 +50,31 @@ let convertSeconds = secondsToTime(seconds)
     );
 }
 
+export function StopWatchTimerDisplayCountDown() {
 
+    const {hours, minutes, seconds, setSeconds, setMinutes, setHours} = useContext(CountDownContext);
+
+    const calcsecs = convertToSeconds(hours, minutes, seconds);
+
+
+    const convertSeconds = secondsToTime(calcsecs);
+
+    return (
+
+        <div style={timerFormat}>
+      <span className="hours">
+        {("0" + convertSeconds.hours).slice(-2)}:
+      </span>
+            <span className="minutes">
+        {("0" + convertSeconds.minutes).slice(-2)}:
+      </span>
+            <span className="seconds">
+        {("0" + convertSeconds.seconds).slice(-2)}
+      </span>
+        </div>
+
+
+    );
+}
 
 

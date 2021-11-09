@@ -6,6 +6,7 @@
 import styled from "styled-components";
 
 export function convertToSeconds(hours, minutes, seconds) {
+
   return seconds + minutes * 60 + hours * 60 * 60;
 }
 

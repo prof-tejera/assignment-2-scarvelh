@@ -12,8 +12,6 @@ const ButtonPosition = {
     borderRadius: "20%"
 
 };
-export const H = () => {
-};
 
 function App() {
 

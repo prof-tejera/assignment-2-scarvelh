@@ -1,8 +1,8 @@
 import React from "react";
-import { StopWatchTimerDisplay } from "../generic/TimerDisplay";
+import {StopWatchTimerDisplay} from "../generic/TimerDisplay";
 import StopWatchButtons from "../generic/StopWatchButtons";
-import { customStyleInput } from "./Countdown";
-import { Container } from "../../utils/helpers";
+import {customStyleInput} from "./Countdown";
+import {Container} from "../../utils/helpers";
 
 
 const ButtonPosition = {

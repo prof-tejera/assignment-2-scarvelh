@@ -1,8 +1,8 @@
 import React from "react";
-import { StopWatchTimerDisplay } from "../generic/TimerDisplay";
+import {StopWatchTimerDisplay} from "../generic/TimerDisplay";
 import StopWatchButtons from "../generic/StopWatchButtons";
 import styled from "styled-components";
-import { customStyleInput } from "./Countdown";
+import {customStyleInput} from "./Countdown";
 
 const Container = styled.div`
   width: auto;

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import Button from "./Button";
 import styled from "styled-components";
-import {StopContext, useInterval} from "../../mycontext/MyContexts";
+import {CountDownContext, StopContext} from "../../mycontext/MyContexts";
 
 
 const Container = styled.div`
@@ -35,12 +35,10 @@ const State = {
 };
 
 
-
-
 //class StopWatchButtons extends React.Component {
 const StopWatchButtons = () => {
 
-    const {seconds,setSeconds,CallBackParent} = useContext(StopContext)
+    const {seconds, setSeconds, CallBackParent, onstart, setOnStart} = useContext(StopContext)
 
     let [intervalId, setIntervalId] = useState(0);
 
@@ -50,24 +48,28 @@ const StopWatchButtons = () => {
             <div style={positionButtons}>
 
                 <Button text={"Start"} onClick={() => {
-
-                    setIntervalId(setInterval(() => {  setSeconds(seconds =>seconds + 1)}, 1000))
-
+                    if (!onstart) {
+                        setIntervalId(setInterval(() => {
+                            setSeconds(seconds => seconds + 1)
+                        }, 1000))
+                        setOnStart(onstart => true)
+                    }
 
                 }
                 }
-                disabled={true}/>
+                        disabled={true}/>
                 <Button text={"Stop"} onClick={() => {
                     clearInterval(intervalId);
                     intervalId = null;
+                    setOnStart(onstart => false)
                 }}/>
                 <Button text={"Reset"} onClick={() => {
                     clearInterval(intervalId);
-                    setSeconds(seconds =>0);
+                    setSeconds(seconds => 0);
                     intervalId = null;
+                    setOnStart(onstart => false)
                 }}/>
             </div>
-
 
 
         </Container>
@@ -76,5 +78,77 @@ const StopWatchButtons = () => {
     );
 
 }
+export const StopWatchButtonsCountDown = () => {
 
+    const {
+        seconds,
+        setSeconds,
+        minutes,
+        setMinutes,
+        hours,
+        setHours,
+        onstart,
+        setOnStart,
+        reset,
+        setReset
+    } = useContext(CountDownContext)
+
+    let [intervalId, setIntervalId] = useState(0);
+  // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
+    if (((hours ===0 && minutes === 0 && seconds === 0) &&  onstart)) {
+        clearInterval(intervalId);
+        setSeconds(seconds => 0);
+        setHours(hours => 0);
+        setMinutes(minutes => 0);
+        intervalId = null;
+        setOnStart(onstart => false);
+        setReset(reset => true);
+    }
+
+
+
+
+    return (
+
+        <Container>
+            <div style={positionButtons}>
+
+                <Button text={"Start"} onClick={() => {
+                    if (!onstart) {
+                        console.log(seconds);
+                        setIntervalId(setInterval(() => {
+                            setSeconds(seconds => seconds - 1)
+                        }, 1000))
+                        setOnStart(onstart => true);
+                        setReset(reset => false);
+                    }
+
+
+                }
+                }
+                        disabled={true}/>
+                <Button text={"Stop"} onClick={() => {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                    setOnStart(onstart => false)
+                }}/>
+                <Button text={"Reset"} onClick={() => {
+                    clearInterval(intervalId);
+                    setSeconds(seconds => 0);
+                    setHours(hours => 0);
+                    setMinutes(minutes => 0);
+                    intervalId = null;
+                    setOnStart(onstart => false);
+                    setReset(reset => true);
+
+                }}/>
+            </div>
+
+
+        </Container>
+
+
+    );
+
+}
 export default StopWatchButtons;

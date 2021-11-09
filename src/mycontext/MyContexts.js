@@ -1,5 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
-import {getIntervalTimer} from "../utils/helpers";
+import React, {useState} from "react";
 import Counter from "../utils/Counter";
 
 //const [timerSeconds, setTimerSeconds] = useState(0);
@@ -10,20 +9,13 @@ import Counter from "../utils/Counter";
 // };
 
 
-
-
-
-
-
-
-
 export const CountUp = () => {
 
     //let {hours, minutes, seconds} = useContext(CountProvider);
-let seconds = Counter
-console.log(seconds.count)
+    let seconds = Counter
+    console.log(seconds.count)
     let minutes = 0;
-let hours = 0;
+    let hours = 0;
     if (seconds === 59) {
         this.setState({minutes: this.state.minutes + 1});
         this.setState({seconds: 0});
@@ -45,28 +37,28 @@ export const CallBackParent = (childData) => {
 
 
     console.log(childData.toString());
-     switch (childData.toString()) {
-         case "startButton":
-             console.log("");
+    switch (childData.toString()) {
+        case "startButton":
+            console.log("");
             // StartTimer();
-             //CountUp();
+            //CountUp();
             // let stopWatchtimer = getIntervalTimer(CountUp);
-             break;
-         case "stopButton":
-             // clearInterval(stopWatchtimer);
-             break;
-         case "resetButton":
-             this.setState({
-                 hours: 0,
-                 minutes: 0,
+            break;
+        case "stopButton":
+            // clearInterval(stopWatchtimer);
+            break;
+        case "resetButton":
+            this.setState({
+                hours: 0,
+                minutes: 0,
                 seconds: 0
-             });
-             ;
-             //clearInterval(stopWatchtimer);
-             break;
-         default:
-             break;
-     }
+            });
+            ;
+            //clearInterval(stopWatchtimer);
+            break;
+        default:
+            break;
+    }
     //if (childData === "startTimer") {
     //    StartTimer();
     //}
@@ -91,20 +83,86 @@ export const StopContext = React.createContext({
     }
 );
 
+
 // Create Context Provider
 export function CountProvider({children}) {
     //const [{hours, minutes, seconds}] = useState({hours:0,minutes:0,seconds:0});
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);
- //   const [button]
+    const [onstart, setOnStart] = useState(false);
+    //   const [button]
 
     return <StopContext.Provider
-        value={{hours, minutes, seconds, setSeconds, CallBackParent}}>{children}</StopContext.Provider>
+        value={{
+            hours,
+            minutes,
+            seconds,
+            setSeconds: () => {
+            },
+            CallBackParent,
+            onstart,
+            setOnStart: () => {
+            }
+        }}>{children}</StopContext.Provider>
 }
 
+//-------------------------------------------------------------------------------------------------------------------
+// Context used for all count down timer
+export const CountDownContext = React.createContext({
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        onstate: false,
+        repeat: 0,
+        reset: false,
+        setSeconds: () => {
+        },
+        setMinute: () => {
+        },
+        setHours: () => {
+        },
+        setOnStart: () => {
+        },
+        setRepeat: () => {
+        },
+        setReset: () => {
+        }
+    }
+);
 
-export default CountProvider
+// create context CountDown provider
+export function CountDownProvider({children}) {
+
+    const [seconds, setSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [onstart, setOnStart] = useState(false);
+    const [repeat, setRepeat] = useState(0);
+    const [reset, setReset] = useState(false);
+    //   const [button]
+
+    return <CountDownContext.Provider
+        value={{
+            hours,
+            setHours,
+            minutes,
+            setMinutes,
+            seconds,
+            setSeconds,
+            onstart,
+            setOnStart,
+            repeat,
+            setRepeat,
+            reset,
+            setReset
+        }}>{children}</CountDownContext.Provider>
+}
+
+// create Context for all CountDown Providers
+
+
+export default CountProvider;
 
 
 
