@@ -30,14 +30,13 @@ const StopWatchBodyXY = () => {
     } = useContext(CountDownContext)
     // reset the selected values
     if (reset) {
-    //if (reset && repeat !== 0) {
         hoursInput.current.value = 0;
         minutesInput.current.value = 0;
         secondsInput.current.value = 0;
         repeatInput.current.value = 0;
         setReset(reset => false);
         //-----------------------------------Just Added
-        //setRepeat(repeat=>repeat-1);
+
     }
     return (
         <>

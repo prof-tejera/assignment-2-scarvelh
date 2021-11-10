@@ -1,7 +1,8 @@
-import React, {useContext, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import Button from "./Button";
 import styled from "styled-components";
 import {CountDownContext, StopContext} from "../../mycontext/MyContexts";
+import {convertToSeconds} from "../../utils/helpers";
 
 
 const Container = styled.div`
@@ -94,37 +95,43 @@ export const StopWatchButtonsCountDown = () => {
         repeat,
         setRepeat,
         originalseconds,
-        orginalminutes,
+        originalminutes,
         originalhours
 
     } = useContext(CountDownContext);
 
     let [intervalId, setIntervalId] = useState(0);
 
-    // if (hours === 0 && minutes === 0 && seconds === 0 && onstart /*&& intervalId !== null*/ && repeat >= 0) {
-    //     setRepeat(repeat => repeat - 1);
-    //     console.log("repaet" + repeat);
-    //     setSeconds(seconds => originalseconds);
-    //     setMinutes(minutes => orginalminutes);
-    //     setHours(hours => originalhours);
-    //     setReset(reset => false);
-    //     setOnStart(onstart => false);
-    //     //clearInterval(intervalId);
-    //     //intervalId = null;
-    //
-    // }
+    if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
+        setRepeat(repeat => repeat - 1);
+        console.log("repaet" + repeat);
+        setSeconds(seconds => originalseconds);
+        setMinutes(minutes => originalminutes);
+        setHours(hours => originalhours);
+        setReset(reset => false);
+        setOnStart(onstart =>   true);
 
+        //clearInterval(intervalId);
+        //intervalId = null;
+        //const [, updateState] = useState();
+        //const forceUpdate = useCallback(() => updateState({}), []);
+    }
+
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
 
     // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-    if (((hours === 0 && minutes === 0 && seconds === 0) && onstart && intervalId !== null && repeat === 0)) {
+    if (((hours === 0 && minutes === 0 && seconds === 0)  && onstart && intervalId !== null && repeat === 0)) {
         clearInterval(intervalId);
         setSeconds(seconds => 0);
         setHours(hours => 0);
         setMinutes(minutes => 0);
         intervalId = null;
-        setOnStart(onstart => false);
+        //setOnStart(onstart => false);
+        setOnStart(onstart => true);
         setReset(reset => true);
-        // subtract 1 from repeat
+        //setReset(reset => false);
+        // NEED TO SIMULATE A BUTTON CLICK
 
 
     }
@@ -141,7 +148,11 @@ export const StopWatchButtonsCountDown = () => {
 
                         console.log(seconds);
                         setIntervalId(setInterval(() => {
+                            console.log("interval" + seconds);
+                            const calcsecs = convertToSeconds(hours, minutes, seconds);
                             setSeconds(seconds => seconds - 1)
+
+
                         }, 1000))
                         setOnStart(onstart => true);
                         setReset(reset => false);

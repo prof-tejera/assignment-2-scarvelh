@@ -70,30 +70,18 @@ export function StopWatchTimerDisplayCountDown() {
         originalhours
     } = useContext(CountDownContext);
 
-//--------------------New --------------------------
-    if (hours === 0 && minutes === 0 && seconds === 0 && onstart /*&& intervalId !== null*/ && repeat !== 0) {
-        setRepeat(repeat => repeat - 1);
-        console.log("repaet" + repeat);
-        seconds = originalseconds;
-        minutes = originalminutes;
-        hours = originalhours;
-        setSeconds(seconds => originalseconds);
-        setMinutes(minutes => originalminutes);
-        setHours(hours => originalhours);
-        setReset(reset => false);
-        setOnStart(onstart => false);
-        //clearInterval(intervalId);
-        //intervalId = null;
 
-    }
-
-
-// -----------------------end new ----------------------------------
     const calcsecs = convertToSeconds(hours, minutes, seconds);
-
-
     const convertSeconds = secondsToTime(calcsecs);
-
+//if convertSeconds.seconds < 0)
+    //console.log("Timer <>>" + convertSeconds.seconds)
+    if ((convertSeconds.seconds < 0 || convertSeconds.minutes < 0 || convertSeconds.hours < 0) /*&& !onstart*/) {
+        convertSeconds.seconds = 0;
+        convertSeconds.minutes = 0;
+        convertSeconds.hours = 0;
+         //setReset(reset=>false);
+        // setOnStart(onstart => false);
+    }
     return (
 
         <div style={timerFormat}>
