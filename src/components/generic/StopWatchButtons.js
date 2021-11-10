@@ -80,7 +80,7 @@ const StopWatchButtons = () => {
 }
 export const StopWatchButtonsCountDown = () => {
 
-    const {
+    let {
         seconds,
         setSeconds,
         minutes,
@@ -90,12 +90,33 @@ export const StopWatchButtonsCountDown = () => {
         onstart,
         setOnStart,
         reset,
-        setReset
-    } = useContext(CountDownContext)
+        setReset,
+        repeat,
+        setRepeat,
+        originalseconds,
+        orginalminutes,
+        originalhours
+
+    } = useContext(CountDownContext);
 
     let [intervalId, setIntervalId] = useState(0);
-  // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-    if (((hours ===0 && minutes === 0 && seconds === 0) &&  onstart)) {
+
+    // if (hours === 0 && minutes === 0 && seconds === 0 && onstart /*&& intervalId !== null*/ && repeat >= 0) {
+    //     setRepeat(repeat => repeat - 1);
+    //     console.log("repaet" + repeat);
+    //     setSeconds(seconds => originalseconds);
+    //     setMinutes(minutes => orginalminutes);
+    //     setHours(hours => originalhours);
+    //     setReset(reset => false);
+    //     setOnStart(onstart => false);
+    //     //clearInterval(intervalId);
+    //     //intervalId = null;
+    //
+    // }
+
+
+    // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
+    if (((hours === 0 && minutes === 0 && seconds === 0) && onstart && intervalId !== null && repeat === 0)) {
         clearInterval(intervalId);
         setSeconds(seconds => 0);
         setHours(hours => 0);
@@ -103,18 +124,21 @@ export const StopWatchButtonsCountDown = () => {
         intervalId = null;
         setOnStart(onstart => false);
         setReset(reset => true);
+        // subtract 1 from repeat
+
+
     }
 
 
-
-
     return (
+
 
         <Container>
             <div style={positionButtons}>
 
                 <Button text={"Start"} onClick={() => {
                     if (!onstart) {
+
                         console.log(seconds);
                         setIntervalId(setInterval(() => {
                             setSeconds(seconds => seconds - 1)

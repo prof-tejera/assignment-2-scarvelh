@@ -113,12 +113,15 @@ export const CountDownContext = React.createContext({
         hours: 0,
         minutes: 0,
         seconds: 0,
-        onstate: false,
+        orginalhours: 0,
+        orginalminutes: 0,
+        originalseconds: 0,
+        onstart: false,
         repeat: 0,
         reset: false,
         setSeconds: () => {
         },
-        setMinute: () => {
+        setMinutes: () => {
         },
         setHours: () => {
         },
@@ -127,7 +130,13 @@ export const CountDownContext = React.createContext({
         setRepeat: () => {
         },
         setReset: () => {
-        }
+        },
+        setOriginalSeconds: () => {
+        },
+        setOriginalMinutes: () => {
+        },
+        setOriginalHours: () => {
+        },
     }
 );
 
@@ -137,10 +146,15 @@ export function CountDownProvider({children}) {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);
+    const [originalseconds, setOriginalSeconds] = useState(0);
+    const [originalminutes, setOriginalMinutes] = useState(0);
+    const [originalhours, setOriginalHours] = useState(0);
+
+
     const [onstart, setOnStart] = useState(false);
     const [repeat, setRepeat] = useState(0);
     const [reset, setReset] = useState(false);
-    //   const [button]
+
 
     return <CountDownContext.Provider
         value={{
@@ -155,12 +169,15 @@ export function CountDownProvider({children}) {
             repeat,
             setRepeat,
             reset,
-            setReset
+            setReset,
+            originalhours,
+            setOriginalHours,
+            originalminutes,
+            setOriginalMinutes,
+            originalseconds,
+            setOriginalSeconds,
         }}>{children}</CountDownContext.Provider>
 }
-
-// create Context for all CountDown Providers
-
 
 export default CountProvider;
 

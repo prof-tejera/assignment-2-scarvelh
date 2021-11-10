@@ -7,7 +7,7 @@ const minutesInput = React.createRef();
 const secondsInput = React.createRef();
 
 const StopWatchBodyCountDown = () => {
-    const {seconds, setSeconds, minutes, setMinutes, hours, setHours ,reset,setReset,onstart} = useContext(CountDownContext)
+    const {seconds, setSeconds, minutes, setMinutes, hours, setHours ,reset,setReset,onstart,setOnStart} = useContext(CountDownContext)
     // reset the selected values
     if(reset ){
         hoursInput.current.value = 0;

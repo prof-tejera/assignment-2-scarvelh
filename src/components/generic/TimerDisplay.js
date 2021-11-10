@@ -52,8 +52,43 @@ export function StopWatchTimerDisplay() {
 
 export function StopWatchTimerDisplayCountDown() {
 
-    const {hours, minutes, seconds, setSeconds, setMinutes, setHours} = useContext(CountDownContext);
+    let {
+        hours,
+        minutes,
+        seconds,
+        setSeconds,
+        setMinutes,
+        setHours,
+        setRepeat,
+        repeat,
+        onstart,
+        setOnStart,
+        setReset,
+        reset,
+        originalseconds,
+        originalminutes,
+        originalhours
+    } = useContext(CountDownContext);
 
+//--------------------New --------------------------
+    if (hours === 0 && minutes === 0 && seconds === 0 && onstart /*&& intervalId !== null*/ && repeat !== 0) {
+        setRepeat(repeat => repeat - 1);
+        console.log("repaet" + repeat);
+        seconds = originalseconds;
+        minutes = originalminutes;
+        hours = originalhours;
+        setSeconds(seconds => originalseconds);
+        setMinutes(minutes => originalminutes);
+        setHours(hours => originalhours);
+        setReset(reset => false);
+        setOnStart(onstart => false);
+        //clearInterval(intervalId);
+        //intervalId = null;
+
+    }
+
+
+// -----------------------end new ----------------------------------
     const calcsecs = convertToSeconds(hours, minutes, seconds);
 
 
