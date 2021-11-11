@@ -127,6 +127,7 @@ export const CountDownTabataContext = React.createContext({
         onstart: false,
         repeat: 0,
         reset: false,
+        workoutperiod: "workout",
         setSeconds: () => {
         },
         setMinutes: () => {
@@ -152,6 +153,9 @@ export const CountDownTabataContext = React.createContext({
         },
         setOriginalHoursRest: () => {
         },
+        setWorkOutPeriod: () => {
+        },
+
     }
 );
 
@@ -176,7 +180,7 @@ export function CountDownTabataProvider({children}) {
     const [onstart, setOnStart] = useState(false);
     const [repeat, setRepeat] = useState(0);
     const [reset, setReset] = useState(false);
-
+    const [workoutperiod, setWorkOutPeriod] = useState("workout");
 
     return <CountDownTabataContext.Provider
         value={{
@@ -205,6 +209,9 @@ export function CountDownTabataProvider({children}) {
             setOriginalMinutesRest,
             originalsecondsrest,
             setOriginalSecondsRest,
+            //========== set work out period =============
+            workoutperiod,
+            setWorkOutPeriod,
         }}>{children}</CountDownTabataContext.Provider>
 }
 

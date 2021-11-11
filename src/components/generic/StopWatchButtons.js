@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import Button from "./Button";
 import styled from "styled-components";
 import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
@@ -110,7 +110,7 @@ export const StopWatchButtonsCountDown = () => {
         setMinutes(minutes => originalminutes);
         setHours(hours => originalhours);
         setReset(reset => false);
-        setOnStart(onstart =>   true);
+        setOnStart(onstart => true);
 
     }
 
@@ -118,7 +118,7 @@ export const StopWatchButtonsCountDown = () => {
     //const forceUpdate = useCallback(() => updateState({}), []);
 
     // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-    if (((hours === 0 && minutes === 0 && seconds === 0)  && onstart && intervalId !== null && repeat <= 0)) {
+    if (((hours === 0 && minutes === 0 && seconds === 0) && onstart && intervalId !== null && repeat <= 0)) {
         clearInterval(intervalId);
         setSeconds(seconds => 0);
         setHours(hours => 0);
@@ -201,29 +201,59 @@ export const StopWatchButtonsCountDownTabata = () => {
         repeat,
         setRepeat,
         originalseconds,
+        setOriginalSeconds,
         originalminutes,
-        originalhours
-
+        setOriginalMinutes,
+        originalhours,
+        setOriginalHours,
+        setWorkOutPeriod,
+        workoutperiod,
+        originalsecondsrest,
+        originalminutesrest,
+        originalhoursrest,
+        setOriginalHoursRest,
+        setOriginalMinutesRest,
+        setOriginalSecondsRest,
     } = useContext(CountDownTabataContext);
 
     let [intervalId, setIntervalId] = useState(0);
-
+    let flag = "workout";
+    //if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
     if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
-        setRepeat(repeat => repeat - 1);
-        console.log("repaet" + repeat);
-        setSeconds(seconds => originalseconds);
-        setMinutes(minutes => originalminutes);
-        setHours(hours => originalhours);
+        if (workoutperiod !== "workout" && repeat >= 0) {
+            setRepeat(repeat => repeat - 1);
+            //  console.log("repaet" + repeat);
+            setSeconds(seconds => originalseconds);
+            setMinutes(minutes => originalminutes);
+            setHours(hours => originalhours);
+            setWorkOutPeriod(workoutperiod => "workout")
+            //setTimeout(() => {  console.log("World!"); }, 1000);
+
+            flag ='';
+        }
+
+        if (originalsecondsrest !== 0 &&  workoutperiod === "workout")
+            //setRepeat(repeat => repeat - 1);
+        {
+            setSeconds(seconds => originalsecondsrest);
+            setMinutes(minutes => originalminutesrest);
+            setHours(hours => originalhoursrest);
+             setWorkOutPeriod(workoutperiod => "rest")
+
+
+            flag="workout"
+        }
         setReset(reset => false);
-        setOnStart(onstart =>   true);
+        setOnStart(onstart => true);
 
     }
+
 
     //const [, updateState] = useState();
     //const forceUpdate = useCallback(() => updateState({}), []);
 
     // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-    if (((hours === 0 && minutes === 0 && seconds === 0)  && onstart && intervalId !== null && repeat <= 0)) {
+    if (((hours === 0 && minutes === 0 && seconds === 0) && onstart && intervalId !== null && repeat <= 0)) {
         clearInterval(intervalId);
         setSeconds(seconds => 0);
         setHours(hours => 0);
@@ -232,9 +262,17 @@ export const StopWatchButtonsCountDownTabata = () => {
         setOnStart(onstart => false);
         //setOnStart(onstart => true);
         setReset(reset => true);
-        //setReset(reset => false);
-        // NEED TO SIMULATE A BUTTON CLICK
 
+        //=============== reset variables orinal values
+        setOriginalSecondsRest(originalsecondsrest => 0);
+        setOriginalMinutesRest(originalminutesrest => 0);
+        setOriginalHoursRest(originalhoursrest => 0);
+        setOriginalSeconds(originalseconds => 0);
+        setOriginalMinutes(originalminutes => 0);
+        setOriginalHours(originalhours => 0);
+
+        setWorkOutPeriod(workoutperiod => "workout");
+        setRepeat(repeat => 0);
 
     }
 

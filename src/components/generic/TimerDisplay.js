@@ -129,6 +129,8 @@ export function StopWatchTimerDisplayTabataCountDown() {
         originalsecondsrest,
         originalminutesrest,
         originalhoursrest,
+        workoutperiod,
+        setWorkOutPeriod,
     } = useContext(CountDownTabataContext);
 
     const calcsecs = convertToSeconds(hours, minutes, seconds);
