@@ -37,9 +37,9 @@ const State = {
 
 
 //class StopWatchButtons extends React.Component {
-const StopWatchButtons = () => {
+export const StopWatchButtons = () => {
 
-    const {seconds, setSeconds, CallBackParent, onstart, setOnStart} = useContext(StopContext)
+    const {seconds, setSeconds, onstart, setOnStart} = useContext(StopContext)
 
     let [intervalId, setIntervalId] = useState(0);
 
@@ -54,6 +54,7 @@ const StopWatchButtons = () => {
                             setSeconds(seconds => seconds + 1)
                         }, 1000))
                         setOnStart(onstart => true)
+                        //setReset(reset => false);
                     }
 
                 }
@@ -111,24 +112,20 @@ export const StopWatchButtonsCountDown = () => {
         setReset(reset => false);
         setOnStart(onstart =>   true);
 
-        //clearInterval(intervalId);
-        //intervalId = null;
-        //const [, updateState] = useState();
-        //const forceUpdate = useCallback(() => updateState({}), []);
     }
 
-    const [, updateState] = useState();
-    const forceUpdate = useCallback(() => updateState({}), []);
+    //const [, updateState] = useState();
+    //const forceUpdate = useCallback(() => updateState({}), []);
 
     // Once the counter reaches 0 minutes 0 seconds 0 hours reset everything
-    if (((hours === 0 && minutes === 0 && seconds === 0)  && onstart && intervalId !== null && repeat === 0)) {
+    if (((hours === 0 && minutes === 0 && seconds === 0)  && onstart && intervalId !== null && repeat <= 0)) {
         clearInterval(intervalId);
         setSeconds(seconds => 0);
         setHours(hours => 0);
         setMinutes(minutes => 0);
         intervalId = null;
-        //setOnStart(onstart => false);
-        setOnStart(onstart => true);
+        setOnStart(onstart => false);
+        //setOnStart(onstart => true);
         setReset(reset => true);
         //setReset(reset => false);
         // NEED TO SIMULATE A BUTTON CLICK

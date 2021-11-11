@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import {CountDownContext, StopContext} from "../../mycontext/MyContexts";
 import {convertToSeconds, secondsToTime} from "../../utils/helpers";
+import StopWatchButtons from "./StopWatchButtons";
 
 const timerFormat = {
     margin: "20px",
@@ -11,6 +12,23 @@ const timerFormat = {
     height: "55px",
     width: "200px",
     backgroundColor: "white",
+    //backgroundColor: 	"#7CFC00",
+    fontSize: "45px",
+    borderRadius: "20%",
+    /* make display float right */
+    float: "right",
+    border: "1px solid black"
+};
+const timerFormat1 = {
+    margin: "20px",
+    display: "flex",
+    //height: "12%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "55px",
+    width: "200px",
+    //backgroundColor: "white",
+    backgroundColor: "#7CFC00",
     fontSize: "45px",
     borderRadius: "20%",
     /* make display float right */
@@ -18,19 +36,12 @@ const timerFormat = {
     border: "1px solid black"
 };
 
-
 export function StopWatchTimerDisplay() {
     // const { hrs, mins, secs } = props;
     const {hours, minutes, seconds, setSeconds} = useContext(StopContext);
-    //let hours = 0
-    //let minutes = 0;
-    //let seconds =0;
-    //const {count} = React.useContext(CountProvider)
-    // let hours = 0
-    // let minutes = 0;
-    // let seconds = 0;
-    // Calculate Minutes and hours
+
     let convertSeconds = secondsToTime(seconds)
+    // const condition  =hours === 0 && seconds === 0 && minutes === 0;
 
     return (
 
@@ -73,14 +84,12 @@ export function StopWatchTimerDisplayCountDown() {
 
     const calcsecs = convertToSeconds(hours, minutes, seconds);
     const convertSeconds = secondsToTime(calcsecs);
-//if convertSeconds.seconds < 0)
-    //console.log("Timer <>>" + convertSeconds.seconds)
+
     if ((convertSeconds.seconds < 0 || convertSeconds.minutes < 0 || convertSeconds.hours < 0) /*&& !onstart*/) {
         convertSeconds.seconds = 0;
         convertSeconds.minutes = 0;
         convertSeconds.hours = 0;
-         //setReset(reset=>false);
-        // setOnStart(onstart => false);
+
     }
     return (
 
@@ -100,4 +109,4 @@ export function StopWatchTimerDisplayCountDown() {
     );
 }
 
-
+export default StopWatchTimerDisplay;

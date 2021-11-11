@@ -5,7 +5,7 @@ import React, {useContext} from "react";
 const hoursInput = React.createRef();
 const minutesInput = React.createRef();
 const secondsInput = React.createRef();
-const repeatInput = React.createRef();
+let repeatInput = React.createRef();
 
 const StopWatchBodyXY = () => {
     const {
@@ -36,6 +36,10 @@ const StopWatchBodyXY = () => {
         repeatInput.current.value = 0;
         setReset(reset => false);
         //-----------------------------------Just Added
+
+    }
+    if (repeat === 0 && repeat !== null){
+        //repeatInput.current.value = 1;
 
     }
     return (
