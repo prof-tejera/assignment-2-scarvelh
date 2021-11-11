@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
-import {CountDownContext, StopContext} from "../../mycontext/MyContexts";
+import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
 import {convertToSeconds, secondsToTime} from "../../utils/helpers";
-import StopWatchButtons from "./StopWatchButtons";
 
 const timerFormat = {
     margin: "20px",
@@ -35,7 +34,7 @@ const timerFormat1 = {
     float: "right",
     border: "1px solid black"
 };
-
+///===================================================StopWatch Timer Display=================================================
 export function StopWatchTimerDisplay() {
     // const { hrs, mins, secs } = props;
     const {hours, minutes, seconds, setSeconds} = useContext(StopContext);
@@ -60,7 +59,7 @@ export function StopWatchTimerDisplay() {
 
     );
 }
-
+///===================================================CountDown and XY Timer Display=================================================
 export function StopWatchTimerDisplayCountDown() {
 
     let {
@@ -81,6 +80,56 @@ export function StopWatchTimerDisplayCountDown() {
         originalhours
     } = useContext(CountDownContext);
 
+
+    const calcsecs = convertToSeconds(hours, minutes, seconds);
+    const convertSeconds = secondsToTime(calcsecs);
+
+    if ((convertSeconds.seconds < 0 || convertSeconds.minutes < 0 || convertSeconds.hours < 0) /*&& !onstart*/) {
+        convertSeconds.seconds = 0;
+        convertSeconds.minutes = 0;
+        convertSeconds.hours = 0;
+
+    }
+    return (
+
+        <div style={timerFormat}>
+      <span className="hours">
+        {("0" + convertSeconds.hours).slice(-2)}:
+      </span>
+            <span className="minutes">
+        {("0" + convertSeconds.minutes).slice(-2)}:
+      </span>
+            <span className="seconds">
+        {("0" + convertSeconds.seconds).slice(-2)}
+      </span>
+        </div>
+
+
+    );
+}
+///===================================================Tabata Timer Display=================================================
+export function StopWatchTimerDisplayTabataCountDown() {
+
+    let {
+        hours,
+        minutes,
+        seconds,
+        setSeconds,
+        setMinutes,
+        setHours,
+        setRepeat,
+        repeat,
+        onstart,
+        setOnStart,
+        setReset,
+        reset,
+        originalseconds,
+        originalminutes,
+        originalhours,
+        originalsecondsrest,
+        originalminutesrest,
+        originalhoursrest,
+    } = useContext(CountDownTabataContext);
 
     const calcsecs = convertToSeconds(hours, minutes, seconds);
     const convertSeconds = secondsToTime(calcsecs);
