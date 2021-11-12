@@ -47,10 +47,10 @@ class TimersView extends Component {
   // App() {
 
   timers = [
-    { title: "Stopwatch", C: <Stopwatch />, customStyling: { backgroundColor: "#add8e6", alignItems: "center" } },
-    { title: "Countdown", C: <Countdown />, customStyling: { backgroundColor: "#ffffe0", alignItems: "center" } },
-    { title: "XY", C: <XY />, customStyling: { backgroundColor: "#20b2aa", alignItems: "center" } },
-    { title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center" } }
+    { title: "Stopwatch", C: <Stopwatch />, customStyling: { backgroundColor: "#add8e6", alignItems: "center", cursor:"pointer"} },
+    { title: "Countdown", C: <Countdown />, customStyling: { backgroundColor: "#ffffe0", alignItems: "center" ,cursor:"pointer"} },
+    { title: "XY", C: <XY />, customStyling: { backgroundColor: "#20b2aa", alignItems: "center", cursor:"pointer"} },
+    { title: "Tabata", C: <Tabata />, customStyling: { backgroundColor: "#FF7F7F", alignItems: "center",justifyItems: "center", cursor:"pointer"} }
   ];
 
   render() {
