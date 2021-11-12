@@ -3,6 +3,7 @@ import Button from "./Button";
 import styled from "styled-components";
 import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
 import {convertToSeconds} from "../../utils/helpers";
+//import {Container, convertToSeconds} from "../../utils/helpers";
 
 
 const Container = styled.div`
@@ -217,7 +218,7 @@ export const StopWatchButtonsCountDownTabata = () => {
     } = useContext(CountDownTabataContext);
 
     let [intervalId, setIntervalId] = useState(0);
-    let flag = "workout";
+
     //if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
     if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
         if (workoutperiod !== "workout" && repeat >= 0) {
@@ -229,19 +230,17 @@ export const StopWatchButtonsCountDownTabata = () => {
             setWorkOutPeriod(workoutperiod => "workout")
             //setTimeout(() => {  console.log("World!"); }, 1000);
 
-            flag ='';
+
         }
 
-        if (originalsecondsrest !== 0 &&  workoutperiod === "workout")
+        if (originalsecondsrest !== 0 && workoutperiod === "workout")
             //setRepeat(repeat => repeat - 1);
         {
             setSeconds(seconds => originalsecondsrest);
             setMinutes(minutes => originalminutesrest);
             setHours(hours => originalhoursrest);
-             setWorkOutPeriod(workoutperiod => "rest")
+            setWorkOutPeriod(workoutperiod => "rest")
 
-
-            flag="workout"
         }
         setReset(reset => false);
         setOnStart(onstart => true);

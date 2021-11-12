@@ -1,9 +1,12 @@
 import {StopWatchTimerDisplay} from "../generic/TimerDisplay";
 import StopWatchButtons from "../generic/StopWatchButtons";
-import {Container} from "../../utils/helpers";
+
 
 import {CountProvider} from "../../mycontext/MyContexts";
 import ReactDOM from "react-dom";
+import {ThemeContext, ThemeProvider} from "../../mycontext/MyThemeContexts";
+import React from "react";
+import {Container} from "../../utils/helpers";
 //import ReactDOM from "react-dom";
 // align text in a grid
 const ButtonPosition = {
@@ -15,14 +18,20 @@ const ButtonPosition = {
 
 function App() {
 
+    const {themestopwatch} = React.useContext(ThemeContext)
+
     return (
 
         <CountProvider>
-            <Container>
-                <StopWatchTimerDisplay/>
-                <StopWatchButtons/>
-            </Container>
+            <ThemeProvider>
+                <Container style={themestopwatch}>
 
+                    <StopWatchTimerDisplay/>
+                    <div style={ButtonPosition}>
+                        <StopWatchButtons style={ButtonPosition}/>
+                    </div>
+                </Container>
+            </ThemeProvider>
         </CountProvider>
     );
 };

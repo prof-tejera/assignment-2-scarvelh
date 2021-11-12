@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 
 import {CountDownProvider} from "../../mycontext/MyContexts";
 import StopWatchBodyCountDown from "../generic/StopWatchBodyCountDown";
+import {ThemeContext, ThemeProvider} from "../../mycontext/MyThemeContexts";
 
 
 const ButtonPosition = {
@@ -25,13 +26,20 @@ export const customStyleInput = {
 
 
 function App() {
+    const {themecountdown} = React.useContext(ThemeContext)
+
+
     return (
         <CountDownProvider>
-            <Container>
-                <StopWatchTimerDisplayCountDown/>
-                <StopWatchBodyCountDown/>
-                <StopWatchButtonsCountDown/>
-            </Container>
+            <ThemeProvider>
+                <Container style={themecountdown}>
+                    <StopWatchTimerDisplayCountDown/>
+                    <StopWatchBodyCountDown/>
+                    <div style={ButtonPosition}>
+                        <StopWatchButtonsCountDown style={ButtonPosition}/>
+                    </div>
+                </Container>
+            </ThemeProvider>
         </CountDownProvider>
     );
 }
