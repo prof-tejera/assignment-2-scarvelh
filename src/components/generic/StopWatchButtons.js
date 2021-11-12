@@ -3,6 +3,7 @@ import Button from "./Button";
 import styled from "styled-components";
 import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
 import {convertToSeconds} from "../../utils/helpers";
+import {ThemeContext} from "../../mycontext/MyThemeContexts";
 //import {Container, convertToSeconds} from "../../utils/helpers";
 
 
@@ -35,11 +36,12 @@ const State = {
     float: "top",
     disabled: false,
 };
+// align text in a grid
 
 
 //class StopWatchButtons extends React.Component {
 export const StopWatchButtons = () => {
-
+    const {roundedbuttons} = React.useContext(ThemeContext)
     const {seconds, setSeconds, onstart, setOnStart} = useContext(StopContext)
 
     let [intervalId, setIntervalId] = useState(0);
@@ -60,18 +62,19 @@ export const StopWatchButtons = () => {
 
                 }
                 }
+                        style={roundedbuttons}
                         disabled={true}/>
                 <Button text={"Stop"} onClick={() => {
                     clearInterval(intervalId);
                     intervalId = null;
                     setOnStart(onstart => false)
-                }}/>
+                }}style={roundedbuttons} />
                 <Button text={"Reset"} onClick={() => {
                     clearInterval(intervalId);
                     setSeconds(seconds => 0);
                     intervalId = null;
                     setOnStart(onstart => false)
-                }}/>
+                }} style={roundedbuttons}/>
             </div>
 
 
@@ -101,7 +104,7 @@ export const StopWatchButtonsCountDown = () => {
         originalhours
 
     } = useContext(CountDownContext);
-
+    const {roundedbuttons} = React.useContext(ThemeContext)
     let [intervalId, setIntervalId] = useState(0);
 
     if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
@@ -159,12 +162,12 @@ export const StopWatchButtonsCountDown = () => {
 
                 }
                 }
-                        disabled={true}/>
+                        disabled={true} style={roundedbuttons}/>
                 <Button text={"Stop"} onClick={() => {
                     clearInterval(intervalId);
                     intervalId = null;
                     setOnStart(onstart => false)
-                }}/>
+                }} style={roundedbuttons}/>
                 <Button text={"Reset"} onClick={() => {
                     clearInterval(intervalId);
                     setSeconds(seconds => 0);
@@ -174,7 +177,7 @@ export const StopWatchButtonsCountDown = () => {
                     setOnStart(onstart => false);
                     setReset(reset => true);
 
-                }}/>
+                }} style={roundedbuttons}/>
             </div>
 
 
@@ -216,7 +219,7 @@ export const StopWatchButtonsCountDownTabata = () => {
         setOriginalMinutesRest,
         setOriginalSecondsRest,
     } = useContext(CountDownTabataContext);
-
+    const {roundedbuttons} = React.useContext(ThemeContext)
     let [intervalId, setIntervalId] = useState(0);
 
     //if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
@@ -300,12 +303,12 @@ export const StopWatchButtonsCountDownTabata = () => {
 
                 }
                 }
-                        disabled={true}/>
+                        disabled={true} style={roundedbuttons}/>
                 <Button text={"Stop"} onClick={() => {
                     clearInterval(intervalId);
                     intervalId = null;
                     setOnStart(onstart => false)
-                }}/>
+                }} style={roundedbuttons}/>
                 <Button text={"Reset"} onClick={() => {
                     clearInterval(intervalId);
                     setSeconds(seconds => 0);
@@ -315,7 +318,7 @@ export const StopWatchButtonsCountDownTabata = () => {
                     setOnStart(onstart => false);
                     setReset(reset => true);
 
-                }}/>
+                }} style={roundedbuttons}/>
             </div>
 
 
