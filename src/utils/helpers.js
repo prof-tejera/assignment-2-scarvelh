@@ -61,3 +61,10 @@ export function secondsToTime(secs)
   };
   return timerObject;
 }
+// yellow grren
+
+export const myColors = {"yellow-green" : "#9acd32",
+"orange-yellow": "#f5bd1f",
+"eggshell-white": "#FAF9F6",
+"resting": "#40E0D0"
+};

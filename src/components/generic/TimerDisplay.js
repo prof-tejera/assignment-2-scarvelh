@@ -1,8 +1,10 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
-import {convertToSeconds, secondsToTime} from "../../utils/helpers";
+import {convertToSeconds, myColors, secondsToTime} from "../../utils/helpers";
+import {ThemeContext} from "../../mycontext/MyThemeContexts";
+import styled from "styled-components";
 
-const timerFormat = {
+let timerFormat = {
     margin: "20px",
     display: "flex",
     //height: "12%",
@@ -10,41 +12,35 @@ const timerFormat = {
     alignItems: "center",
     height: "55px",
     width: "200px",
-    backgroundColor: "white",
+    backgroundColor: myColors["eggshell-white"],
     //backgroundColor: 	"#7CFC00",
     fontSize: "45px",
     borderRadius: "20%",
-    /* make display float right */
+    //make display float right
     float: "right",
     border: "1px solid black"
 };
-const timerFormat1 = {
-    margin: "20px",
-    display: "flex",
-    //height: "12%",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "55px",
-    width: "200px",
-    //backgroundColor: "white",
-    backgroundColor: "#7CFC00",
-    fontSize: "45px",
-    borderRadius: "20%",
-    /* make display float right */
-    float: "right",
-    border: "1px solid black"
-};
+
 ///===================================================StopWatch Timer Display=================================================
 export function StopWatchTimerDisplay() {
     // const { hrs, mins, secs } = props;
-    const {hours, minutes, seconds, setSeconds} = useContext(StopContext);
+    const {hours, minutes, seconds, setSeconds, onstart} = useContext(StopContext);
 
+    let {counterdisplay} = React.useContext(ThemeContext)
     let convertSeconds = secondsToTime(seconds)
+
     // const condition  =hours === 0 && seconds === 0 && minutes === 0;
 
+
+    if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
+
+        let name = document.getElementById('timerID');
+        name.style.backgroundColor = counterdisplay;
+
+    }
     return (
 
-        <div style={timerFormat}>
+        <div style={timerFormat} id="timerID">
       <span className="hours">
         {("0" + convertSeconds.hours).slice(-2)}:
       </span>
@@ -59,6 +55,7 @@ export function StopWatchTimerDisplay() {
 
     );
 }
+
 ///===================================================CountDown and XY Timer Display=================================================
 export function StopWatchTimerDisplayCountDown() {
 
@@ -79,7 +76,7 @@ export function StopWatchTimerDisplayCountDown() {
         originalminutes,
         originalhours
     } = useContext(CountDownContext);
-
+    let {counterdisplay} = React.useContext(ThemeContext);
 
     const calcsecs = convertToSeconds(hours, minutes, seconds);
     const convertSeconds = secondsToTime(calcsecs);
@@ -90,9 +87,14 @@ export function StopWatchTimerDisplayCountDown() {
         convertSeconds.hours = 0;
 
     }
+    if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
+
+        let name = document.getElementById('timerCountDownID');
+        name.style.backgroundColor = counterdisplay;
+    }
     return (
 
-        <div style={timerFormat}>
+        <div style={timerFormat} id="timerCountDownID">
       <span className="hours">
         {("0" + convertSeconds.hours).slice(-2)}:
       </span>
@@ -107,6 +109,7 @@ export function StopWatchTimerDisplayCountDown() {
 
     );
 }
+
 ///===================================================Tabata Timer Display=================================================
 export function StopWatchTimerDisplayTabataCountDown() {
 
@@ -132,7 +135,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
         workoutperiod,
         setWorkOutPeriod,
     } = useContext(CountDownTabataContext);
-
+    let {counterdisplay} = React.useContext(ThemeContext);
     const calcsecs = convertToSeconds(hours, minutes, seconds);
     const convertSeconds = secondsToTime(calcsecs);
 
@@ -142,9 +145,14 @@ export function StopWatchTimerDisplayTabataCountDown() {
         convertSeconds.hours = 0;
 
     }
+    if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
+
+        let name = document.getElementById('timerTabataID');
+        name.style.backgroundColor = counterdisplay;
+    }
     return (
 
-        <div style={timerFormat}>
+        <div style={timerFormat} id="timerTabataID">
       <span className="hours">
         {("0" + convertSeconds.hours).slice(-2)}:
       </span>
