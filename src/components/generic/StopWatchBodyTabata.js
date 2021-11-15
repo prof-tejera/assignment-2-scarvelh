@@ -2,6 +2,8 @@ import styled from "styled-components";
 import {customStyleInput} from "../timers/Countdown";
 import React, {useContext} from "react";
 import {CountDownTabataContext} from "../../mycontext/MyContexts";
+import {myColors} from "../../utils/helpers";
+import {ThemeContext} from "../../mycontext/MyThemeContexts";
 
 const Container = styled.div`
   width: auto;
@@ -90,6 +92,7 @@ export const StopWatchBodyTabata = () => {
         setOriginalSecondsRest,
         setOriginalMinutesRest,
     } = useContext(CountDownTabataContext)
+   const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     // reset the selected values
     if (reset) {
         hoursInput.current.value = 0;
@@ -99,7 +102,7 @@ export const StopWatchBodyTabata = () => {
         minutesRestInput.current.value = 0;
         secondsRestInput.current.value = 0;
         repeatInput.current.value = 0;
-
+        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
         setReset(reset => false);
         //-----------------------------------Just Added
 
@@ -116,18 +119,14 @@ export const StopWatchBodyTabata = () => {
                     <p>Timer 1 (Hours)</p>
                     <input ref={hoursInput} type="number" placeholder={0} name="hours" onChange={(e) => {
 
-
-                        setHours(hours => hours + 1);
-                        setOriginalHours(originalhour => originalhour + 1);
+                        setOriginalHours(originalhour => hoursInput.current.value);
                     }}
                            min="0" style={customStyleInput}/>
                     <p>Timer 1 (Minutes)</p>
                     <input ref={minutesInput} type="number" placeholder={0} name="minutes"
                            onChange={(e) => {
 
-
-                               setMinutes(minutes => minutes + 1);
-                               setOriginalMinutes(originalminutes => originalminutes + 1);
+                               setOriginalMinutes(originalminutes => minutesInput.current.value);
 
                            }}
                            min="0" style={customStyleInput}/>
@@ -135,9 +134,7 @@ export const StopWatchBodyTabata = () => {
                     <input ref={secondsInput} type="number" placeholder={0} name="seconds"
                            onChange={(e) => {
 
-
-                               setSeconds(seconds => seconds + 1);
-                               setOriginalSeconds(originalseconds => originalseconds + 1)
+                               setOriginalSeconds(originalseconds => secondsInput.current.value)
 
                            }}
                            min="0" style={customStyleInput}/>
@@ -146,7 +143,7 @@ export const StopWatchBodyTabata = () => {
                     <p>Timer 2 (Rest Hours)</p>
                     <input ref={hoursRestInput} type="number" placeholder={0} name="hours" onChange={(e) => {
                        // setHours(hours => hours + 1);
-                        setOriginalHoursRest(originalhoursrest => originalhoursrest + 1);
+                        setOriginalHoursRest(originalhoursrest => hoursRestInput.current.value);
                     }}
                            min="0" style={customStyleInput}/>
                     <p>Timer 2 (Rest Minutes)</p>
@@ -155,7 +152,7 @@ export const StopWatchBodyTabata = () => {
 
 
                               // setMinutes(minutes => minutes + 1);
-                               setOriginalMinutesRest(originalminutesrest => originalminutesrest + 1);
+                               setOriginalMinutesRest(originalminutesrest => minutesRestInput.current.value);
 
                            }}
                            min="0" style={customStyleInput}/>
@@ -165,7 +162,7 @@ export const StopWatchBodyTabata = () => {
 
 
                               // setSeconds(seconds => seconds + 1);
-                               setOriginalSecondsRest(originalsecondsrest => originalsecondsrest + 1)
+                               setOriginalSecondsRest(originalsecondsrest => secondsRestInput)
 
                            }}
                            min="0" style={customStyleInput}/>
@@ -177,7 +174,7 @@ export const StopWatchBodyTabata = () => {
                            onChange={(e) => {
 
 
-                               setRepeat(repeat => repeat + 1)
+                               setRepeat(originalrepeat => repeatInput.current.value)
 
                            }}
                            min="0" style={customStyleInput}/>

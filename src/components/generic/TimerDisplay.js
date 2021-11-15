@@ -76,7 +76,7 @@ export function StopWatchTimerDisplayCountDown() {
         originalminutes,
         originalhours
     } = useContext(CountDownContext);
-    let {counterdisplay} = React.useContext(ThemeContext);
+    let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
 
     const calcsecs = convertToSeconds(hours, minutes, seconds);
     const convertSeconds = secondsToTime(calcsecs);
@@ -85,8 +85,15 @@ export function StopWatchTimerDisplayCountDown() {
         convertSeconds.seconds = 0;
         convertSeconds.minutes = 0;
         convertSeconds.hours = 0;
+        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
 
     }
+if (! reset && seconds !== 0 && hours !== 0 && minutes !== 0){
+    convertSeconds.seconds = 0;
+    convertSeconds.minutes = 0;
+    convertSeconds.hours = 0;
+}
+
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
 
         let name = document.getElementById('timerCountDownID');
@@ -135,7 +142,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
         workoutperiod,
         setWorkOutPeriod,
     } = useContext(CountDownTabataContext);
-    let {counterdisplay} = React.useContext(ThemeContext);
+    let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     const calcsecs = convertToSeconds(hours, minutes, seconds);
     const convertSeconds = secondsToTime(calcsecs);
 
@@ -143,7 +150,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
         convertSeconds.seconds = 0;
         convertSeconds.minutes = 0;
         convertSeconds.hours = 0;
-
+        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
     }
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
 

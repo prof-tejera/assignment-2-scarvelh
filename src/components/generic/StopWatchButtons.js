@@ -42,7 +42,7 @@ const State = {
 //class StopWatchButtons extends React.Component {
 export const StopWatchButtons = () => {
     const {roundedbuttons, counterdisplay, setCounterDisplay} = React.useContext(ThemeContext)
-    const {seconds, setSeconds, onstart, setOnStart} = useContext(StopContext)
+    let {seconds, setSeconds, onstart, setOnStart, originalseconds} = useContext(StopContext)
 
     let [intervalId, setIntervalId] = useState(0);
 
@@ -52,6 +52,7 @@ export const StopWatchButtons = () => {
             <div style={positionButtons}>
 
                 <Button text={"Start"} onClick={() => {
+                    // seconds = originalseconds;
                     if (!onstart) {
                         setIntervalId(setInterval(() => {
                             setSeconds(seconds => seconds + 1)
@@ -60,6 +61,7 @@ export const StopWatchButtons = () => {
                         //setReset(reset => false);
                         setCounterDisplay(counterdisplay => myColors["yellow-green"])
                     }
+
 
                 }
                 }
@@ -104,7 +106,10 @@ export const StopWatchButtonsCountDown = () => {
         setRepeat,
         originalseconds,
         originalminutes,
-        originalhours
+        originalhours,
+        setOriginalHours,
+        setOriginalMinutes,
+        setOriginalSeconds,
 
     } = useContext(CountDownContext);
     //const {roundedbuttons} = React.useContext(ThemeContext);
@@ -119,7 +124,9 @@ export const StopWatchButtonsCountDown = () => {
         setHours(hours => originalhours);
         setReset(reset => false);
         setOnStart(onstart => true);
-
+        setOriginalSeconds(originalseconds => 0);
+        setOriginalMinutes(originalminutes => 0);
+        setOriginalHours(originalhours => 0)
     }
 
     //const [, updateState] = useState();
@@ -137,7 +144,9 @@ export const StopWatchButtonsCountDown = () => {
         setReset(reset => true);
         //setReset(reset => false);
         // NEED TO SIMULATE A BUTTON CLICK
-
+        setOriginalSeconds(originalseconds => 0);
+        setOriginalMinutes(originalminutes => 0);
+        setOriginalHours(originalhours => 0);
 
     }
 
@@ -149,6 +158,10 @@ export const StopWatchButtonsCountDown = () => {
             <div style={positionButtons}>
 
                 <Button text={"Start"} onClick={() => {
+                    setSeconds(seconds => originalseconds);
+                    setHours(hours => originalhours );
+                    setMinutes(minutes => originalminutes);
+
                     if (!onstart) {
 
                         console.log(seconds);
@@ -157,12 +170,15 @@ export const StopWatchButtonsCountDown = () => {
                             const calcsecs = convertToSeconds(hours, minutes, seconds);
                             setSeconds(seconds => seconds - 1)
                             //setCounterDisplay(counterdisplay => "green")
+                            console.log("Seconds <> " + seconds);
 
                         }, 1000))
                         setOnStart(onstart => true);
                         setReset(reset => false);
-                        setCounterDisplay(counterdisplay => myColors["yellow-green"])
+                        setCounterDisplay(counterdisplay => myColors["yellow-green"]);
+
                     }
+
                 }
                 }
                         disabled={true} style={roundedbuttons}/>
@@ -182,7 +198,11 @@ export const StopWatchButtonsCountDown = () => {
                     intervalId = null;
                     setOnStart(onstart => false);
                     setReset(reset => true);
-                    setCounterDisplay(counterdisplay => myColors["eggshell-white"])
+                    setCounterDisplay(counterdisplay => myColors["eggshell-white"]);
+                    setOriginalSeconds(originalseconds => 0);
+                    setOriginalMinutes(originalminutes => 0);
+                    setOriginalHours(originalhours => 0);
+
                 }} style={roundedbuttons}/>
             </div>
 
@@ -272,7 +292,7 @@ export const StopWatchButtonsCountDownTabata = () => {
         //setOnStart(onstart => true);
         setReset(reset => true);
 
-        //=============== reset variables orinal values
+        //=============== reset variables original values
         setOriginalSecondsRest(originalsecondsrest => 0);
         setOriginalMinutesRest(originalminutesrest => 0);
         setOriginalHoursRest(originalhoursrest => 0);

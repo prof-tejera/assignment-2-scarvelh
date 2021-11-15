@@ -6,8 +6,13 @@
 import styled from "styled-components";
 
 export function convertToSeconds(hours, minutes, seconds) {
-
-  return seconds + minutes * 60 + hours * 60 * 60;
+ // Calculated the number of seconds
+  let calculated_seconds = Math.floor(seconds);
+  let calculated_minutes = Math.floor((minutes * 60));
+  let calulated_hours = Math.floor((hours * 60 * 60))
+  let total_seconds = Math.floor((calculated_seconds + calculated_minutes + calulated_hours))
+ // return the number if seconds for conversion
+  return total_seconds;
 }
 
 // interval timer used for stopwatches
@@ -63,7 +68,7 @@ export function secondsToTime(secs)
 }
 // yellow grren
 
-export const myColors = {"yellow-green" : "#9acd32",
+export const myColors = {"yellow-green" : "#43a876",
 "orange-yellow": "#f5bd1f",
 "eggshell-white": "#FAF9F6",
 "resting": "#40E0D0"

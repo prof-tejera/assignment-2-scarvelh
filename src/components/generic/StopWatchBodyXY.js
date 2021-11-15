@@ -1,6 +1,8 @@
 import {customStyleInput} from "../timers/Countdown";
 import {CountDownContext} from "../../mycontext/MyContexts";
 import React, {useContext} from "react";
+import {myColors} from "../../utils/helpers";
+import {ThemeContext} from "../../mycontext/MyThemeContexts";
 
 const hoursInput = React.createRef();
 const minutesInput = React.createRef();
@@ -28,12 +30,15 @@ const StopWatchBodyXY = () => {
         setOriginalSeconds,
         setOriginalMinutes
     } = useContext(CountDownContext)
+    const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     // reset the selected values
     if (reset) {
         hoursInput.current.value = 0;
         minutesInput.current.value = 0;
         secondsInput.current.value = 0;
         repeatInput.current.value = 0;
+        setReset(reset => false);
+        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
         setReset(reset => false);
         //-----------------------------------Just Added
 
@@ -48,16 +53,16 @@ const StopWatchBodyXY = () => {
             <input ref={hoursInput} type="number" placeholder={0} name="hours" onChange={(e) => {
 
 
-                setHours(hours => hours + 1);
-                setOriginalHours(originalhour =>originalhour +1);
+                //setHours(hours => hours + 1);
+                setOriginalHours(originalhour =>hoursInput.current.val);
             }} min="0"
                    style={customStyleInput}/>
             <p>(Minutes)</p>
             <input ref={minutesInput} type="number" placeholder={0} name="minutes" onChange={(e) => {
 
 
-                setMinutes(minutes => minutes + 1);
-                setOriginalMinutes(originalminutes=> originalminutes+1);
+                //setMinutes(minutes => minutes + 1);
+                setOriginalMinutes(originalminutes=> minutesInput.current.value);
 
             }}
                    min="0" style={customStyleInput}/>
@@ -65,8 +70,8 @@ const StopWatchBodyXY = () => {
             <input ref={secondsInput} type="number" placeholder={0} name="seconds" onChange={(e) => {
 
 
-                setSeconds(seconds => seconds + 1);
-                setOriginalSeconds(originalseconds=>originalseconds+1)
+                //setSeconds(seconds => seconds + 1);
+                setOriginalSeconds(originalseconds=>secondsInput.current.value)
 
             }}
                    min="0" style={customStyleInput}/>
