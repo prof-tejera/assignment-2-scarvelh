@@ -28,11 +28,14 @@ const StopWatchBodyXY = () => {
         originalhours,
         setOriginalHours,
         setOriginalSeconds,
-        setOriginalMinutes
+        setOriginalMinutes,
+        originalrepeat,
+        setOriginalRepeat,
+
     } = useContext(CountDownContext)
     const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     // reset the selected values
-    if (reset) {
+    if (reset && (seconds <= 0 && minutes <= 0 && hours <= 0)) {
         hoursInput.current.value = 0;
         minutesInput.current.value = 0;
         secondsInput.current.value = 0;
@@ -40,6 +43,8 @@ const StopWatchBodyXY = () => {
         setReset(reset => false);
         setCounterDisplay(counterdisplay => myColors["eggshell-white"])
         setReset(reset => false);
+        setOriginalRepeat(originalrepeat => 0);
+
         //-----------------------------------Just Added
 
     }
@@ -79,8 +84,7 @@ const StopWatchBodyXY = () => {
             <input ref={repeatInput} type="number" placeholder={0} name="numTimes" onChange={(e) => {
 
 
-                setRepeat(repeat => repeat + 1)
-
+                setOriginalRepeat(originalrepeat => repeatInput.current.value);
             }}
                    min="0" style={customStyleInput}/>
 

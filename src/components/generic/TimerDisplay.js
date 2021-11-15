@@ -88,11 +88,11 @@ export function StopWatchTimerDisplayCountDown() {
         setCounterDisplay(counterdisplay => myColors["eggshell-white"])
 
     }
-if (! reset && seconds !== 0 && hours !== 0 && minutes !== 0){
-    convertSeconds.seconds = 0;
-    convertSeconds.minutes = 0;
-    convertSeconds.hours = 0;
-}
+    if (!reset && seconds !== 0 && hours !== 0 && minutes !== 0) {
+        convertSeconds.seconds = 0;
+        convertSeconds.minutes = 0;
+        convertSeconds.hours = 0;
+    }
 
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
 

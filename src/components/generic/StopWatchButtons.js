@@ -110,6 +110,8 @@ export const StopWatchButtonsCountDown = () => {
         setOriginalHours,
         setOriginalMinutes,
         setOriginalSeconds,
+        originalrepeat,
+        setOriginalRepeat,
 
     } = useContext(CountDownContext);
     //const {roundedbuttons} = React.useContext(ThemeContext);
@@ -124,9 +126,10 @@ export const StopWatchButtonsCountDown = () => {
         setHours(hours => originalhours);
         setReset(reset => false);
         setOnStart(onstart => true);
-        setOriginalSeconds(originalseconds => 0);
-        setOriginalMinutes(originalminutes => 0);
-        setOriginalHours(originalhours => 0)
+        //setOriginalSeconds(originalseconds => 0);
+        //setOriginalMinutes(originalminutes => 0);
+        //setOriginalHours(originalhours => 0)
+        //setOriginalRepeat(originalrepeat => 0);
     }
 
     //const [, updateState] = useState();
@@ -147,6 +150,7 @@ export const StopWatchButtonsCountDown = () => {
         setOriginalSeconds(originalseconds => 0);
         setOriginalMinutes(originalminutes => 0);
         setOriginalHours(originalhours => 0);
+        setOriginalRepeat(originalrepeat => 0);
 
     }
 
@@ -159,8 +163,10 @@ export const StopWatchButtonsCountDown = () => {
 
                 <Button text={"Start"} onClick={() => {
                     setSeconds(seconds => originalseconds);
-                    setHours(hours => originalhours );
+                    setHours(hours => originalhours);
                     setMinutes(minutes => originalminutes);
+                    setRepeat(repeat => originalrepeat);
+
 
                     if (!onstart) {
 
@@ -202,6 +208,8 @@ export const StopWatchButtonsCountDown = () => {
                     setOriginalSeconds(originalseconds => 0);
                     setOriginalMinutes(originalminutes => 0);
                     setOriginalHours(originalhours => 0);
+                    setOriginalRepeat(originalrepeat => 0);
+                    setRepeat(repeat => 0);
 
                 }} style={roundedbuttons}/>
             </div>

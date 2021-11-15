@@ -48,6 +48,7 @@ export const CountDownContext = React.createContext({
         originalseconds: 0,
         onstart: false,
         repeat: 0,
+        originalrepeat:0,
         reset: false,
         setSeconds: () => {
         },
@@ -67,7 +68,11 @@ export const CountDownContext = React.createContext({
         },
         setOriginalHours: () => {
         },
-    }
+        setOriginalRepeat:()=>{
+
+        }
+    },
+
 );
 
 // create context CountDown provider
@@ -83,6 +88,7 @@ export function CountDownProvider({children}) {
 
     const [onstart, setOnStart] = useState(false);
     const [repeat, setRepeat] = useState(0);
+    const [originalrepeat,setOriginalRepeat] = useState(0);
     const [reset, setReset] = useState(false);
 
 
@@ -106,6 +112,8 @@ export function CountDownProvider({children}) {
             setOriginalMinutes,
             originalseconds,
             setOriginalSeconds,
+            originalrepeat,
+            setOriginalRepeat,
         }}>{children}</CountDownContext.Provider>
 }
 
