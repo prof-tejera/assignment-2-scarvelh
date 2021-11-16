@@ -7,6 +7,7 @@ import {CountDownTabataProvider} from "../../mycontext/MyContexts";
 import StopWatchBodyTabata from "../generic/StopWatchBodyTabata";
 import {ThemeContext, ThemeProvider} from "../../mycontext/MyThemeContexts";
 import styled from "styled-components";
+import {StopWatchRoundsTabata} from "../generic/StopWatchRounds";
 
 const Container = styled.div`
   width: auto;
@@ -56,14 +57,16 @@ function App() {
     return (
         <CountDownTabataProvider>
             <ThemeProvider>
-            <Container style={themetabata}>
-                <StopWatchTimerDisplayTabataCountDown/>
-                <StopWatchBodyTabata/>
-                <div style={ButtonPosition}>
-                <StopWatchButtonsCountDownTabata/>
-                </div>
-            </Container>
-                </ThemeProvider>
+                <Container style={themetabata}>
+                    <StopWatchTimerDisplayTabataCountDown/>
+                    <StopWatchRoundsTabata/>
+                    <hr style={{color: "black"}}/>
+                    <StopWatchBodyTabata/>
+                    <div style={ButtonPosition}>
+                        <StopWatchButtonsCountDownTabata/>
+                    </div>
+                </Container>
+            </ThemeProvider>
         </CountDownTabataProvider>
     );
 }

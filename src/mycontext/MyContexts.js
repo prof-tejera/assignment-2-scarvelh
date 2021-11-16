@@ -11,6 +11,10 @@ export const StopContext = React.createContext({
         onstart: 0,
         setOnStart: () => {
         },
+        fastforward: false,
+        setFastForward: () => {
+
+        },
 
     }
 );
@@ -23,6 +27,7 @@ export function CountProvider({children}) {
     const [minutes, setMinutes] = useState(0);
     const [hours, setHours] = useState(0);
     const [onstart, setOnStart] = useState(false);
+    const [fastforward, setFastForward] = useState(false);
     //   const [button]
 
     return <StopContext.Provider
@@ -33,6 +38,8 @@ export function CountProvider({children}) {
             setSeconds,
             onstart,
             setOnStart,
+            fastforward,
+            setFastForward
 
         }}>{children}</StopContext.Provider>
 }
@@ -48,8 +55,9 @@ export const CountDownContext = React.createContext({
         originalseconds: 0,
         onstart: false,
         repeat: 0,
-        originalrepeat:0,
+        originalrepeat: 0,
         reset: false,
+        fastforward: false,
         setSeconds: () => {
         },
         setMinutes: () => {
@@ -68,11 +76,13 @@ export const CountDownContext = React.createContext({
         },
         setOriginalHours: () => {
         },
-        setOriginalRepeat:()=>{
+        setOriginalRepeat: () => {
 
-        }
+        },
+        setFastForward: () => {
+
+        },
     },
-
 );
 
 // create context CountDown provider
@@ -88,9 +98,9 @@ export function CountDownProvider({children}) {
 
     const [onstart, setOnStart] = useState(false);
     const [repeat, setRepeat] = useState(0);
-    const [originalrepeat,setOriginalRepeat] = useState(0);
+    const [originalrepeat, setOriginalRepeat] = useState(0);
     const [reset, setReset] = useState(false);
-
+    const [fastforward, setFastForward] = useState(false);
 
     return <CountDownContext.Provider
         value={{
@@ -114,6 +124,8 @@ export function CountDownProvider({children}) {
             setOriginalSeconds,
             originalrepeat,
             setOriginalRepeat,
+            fastforward,
+            setFastForward,
         }}>{children}</CountDownContext.Provider>
 }
 
@@ -135,7 +147,8 @@ export const CountDownTabataContext = React.createContext({
         onstart: false,
         repeat: 1,
         reset: false,
-        workoutperiod: "workout",
+        workoutperiod: "Workout",
+        fastforward: false,
         setSeconds: () => {
         },
         setMinutes: () => {
@@ -163,7 +176,11 @@ export const CountDownTabataContext = React.createContext({
         },
         setWorkOutPeriod: () => {
         },
+        setOriginalReapeat: () => {
+        },
+        setFastForward: () => {
 
+        },
     }
 );
 
@@ -187,9 +204,10 @@ export function CountDownTabataProvider({children}) {
 
     const [onstart, setOnStart] = useState(false);
     const [repeat, setRepeat] = useState(1);
+    const [originalrepeat, setOriginalRepeat] = useState(1);
     const [reset, setReset] = useState(false);
-    const [workoutperiod, setWorkOutPeriod] = useState("workout");
-
+    const [workoutperiod, setWorkOutPeriod] = useState("Workout");
+    const [fastforward, setFastForward] = useState(false);
     return <CountDownTabataContext.Provider
         value={{
             hours,
@@ -217,9 +235,18 @@ export function CountDownTabataProvider({children}) {
             setOriginalMinutesRest,
             originalsecondsrest,
             setOriginalSecondsRest,
+            setSecondsRest,
+            setMinutesRest,
+            setHoursRest,
+            setOriginalRepeat,
             //========== set work out period =============
             workoutperiod,
             setWorkOutPeriod,
+            originalrepeat,
+            //setOriginalRepeat,
+            fastforward,
+            setFastForward,
+
         }}>{children}</CountDownTabataContext.Provider>
 }
 

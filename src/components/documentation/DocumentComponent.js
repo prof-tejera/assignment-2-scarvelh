@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   border: 1px solid #121212;
-  margin: 20px 0px;
+  margin: 20px 0;
 `;
 
 const Container = styled.div`

@@ -1,4 +1,4 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import Stopwatch from "../components/timers/Stopwatch";
 import Countdown from "../components/timers/Countdown";
 import XY from "../components/timers/XY";

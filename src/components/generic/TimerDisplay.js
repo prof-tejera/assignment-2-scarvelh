@@ -1,7 +1,8 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
 import {convertToSeconds, myColors, secondsToTime} from "../../utils/helpers";
 import {ThemeContext} from "../../mycontext/MyThemeContexts";
+import {keyframes} from "styled-components";
 import styled from "styled-components";
 
 let timerFormat = {
@@ -21,10 +22,25 @@ let timerFormat = {
     border: "1px solid black"
 };
 
+function blinkingEffect() {
+    return keyframes`
+      50% {
+        opacity: 0;
+      }
+    `;
+}
+const blinkingRedEffect={
+   color: "red"
+}
+const AnimatedComponent = styled.div`
+  animation: ${blinkingEffect} 1s linear infinite;
+  
+`;
+
 ///===================================================StopWatch Timer Display=================================================
 export function StopWatchTimerDisplay() {
     // const { hrs, mins, secs } = props;
-    const {hours, minutes, seconds, setSeconds, onstart} = useContext(StopContext);
+    const {hours, minutes, seconds, setSeconds, onstart, fastforward} = useContext(StopContext);
 
     let {counterdisplay} = React.useContext(ThemeContext)
     let convertSeconds = secondsToTime(seconds)
@@ -38,22 +54,32 @@ export function StopWatchTimerDisplay() {
         name.style.backgroundColor = counterdisplay;
 
     }
-    return (
+    if (fastforward) {
+        return (
+            <AnimatedComponent id="timerID">
 
-        <div style={timerFormat} id="timerID">
+                <h1 style={{color:"red"}}> Congratulations workout completed!</h1>
+
+            </AnimatedComponent>
+        );
+    } else {
+        return (
+
+            <div style={timerFormat} id="timerID">
       <span className="hours">
         {("0" + convertSeconds.hours).slice(-2)}:
       </span>
-            <span className="minutes">
+                <span className="minutes">
         {("0" + convertSeconds.minutes).slice(-2)}:
       </span>
-            <span className="seconds">
+                <span className="seconds">
         {("0" + convertSeconds.seconds).slice(-2)}
       </span>
-        </div>
+            </div>
 
 
-    );
+        );
+    }
 }
 
 ///===================================================CountDown and XY Timer Display=================================================
@@ -74,7 +100,9 @@ export function StopWatchTimerDisplayCountDown() {
         reset,
         originalseconds,
         originalminutes,
-        originalhours
+        originalhours,
+        fastforward,
+        setFastForward
     } = useContext(CountDownContext);
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
 
@@ -90,7 +118,7 @@ export function StopWatchTimerDisplayCountDown() {
     }
     if (!reset && seconds !== 0 && hours !== 0 && minutes !== 0) {
         convertSeconds.seconds = 0;
-        convertSeconds.minutes = 0;
+        convertSeconds.seconds = 0;
         convertSeconds.hours = 0;
     }
 
@@ -99,22 +127,31 @@ export function StopWatchTimerDisplayCountDown() {
         let name = document.getElementById('timerCountDownID');
         name.style.backgroundColor = counterdisplay;
     }
-    return (
+    if (fastforward) {
+        return (
+            <AnimatedComponent id="timerCountDownID">
+                <h1 style={{color:"red"}}> Congratulations workout completed!</h1>
+            </AnimatedComponent>
+        );
+    } else {
+        return (
 
-        <div style={timerFormat} id="timerCountDownID">
+            <div style={timerFormat} id="timerCountDownID">
       <span className="hours">
         {("0" + convertSeconds.hours).slice(-2)}:
       </span>
-            <span className="minutes">
+                <span className="minutes">
         {("0" + convertSeconds.minutes).slice(-2)}:
       </span>
-            <span className="seconds">
+                <span className="seconds">
         {("0" + convertSeconds.seconds).slice(-2)}
       </span>
-        </div>
+            </div>
 
 
-    );
+        );
+
+    }
 }
 
 ///===================================================Tabata Timer Display=================================================
@@ -141,6 +178,8 @@ export function StopWatchTimerDisplayTabataCountDown() {
         originalhoursrest,
         workoutperiod,
         setWorkOutPeriod,
+        fastforward,
+
     } = useContext(CountDownTabataContext);
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
     const calcsecs = convertToSeconds(hours, minutes, seconds);
@@ -157,22 +196,30 @@ export function StopWatchTimerDisplayTabataCountDown() {
         let name = document.getElementById('timerTabataID');
         name.style.backgroundColor = counterdisplay;
     }
-    return (
+    if (fastforward) {
+        return (
+            <AnimatedComponent id="timerTabataID">
+                <h1 style={{color:"red"}}> Congratulations workout completed!</h1>
+            </AnimatedComponent>
+        );
+    } else {
+        return (
 
-        <div style={timerFormat} id="timerTabataID">
+            <div style={timerFormat} id="timerTabataID">
       <span className="hours">
         {("0" + convertSeconds.hours).slice(-2)}:
       </span>
-            <span className="minutes">
+                <span className="minutes">
         {("0" + convertSeconds.minutes).slice(-2)}:
       </span>
-            <span className="seconds">
+                <span className="seconds">
         {("0" + convertSeconds.seconds).slice(-2)}
       </span>
-        </div>
+            </div>
 
 
-    );
+        );
+    }
 }
 
 export default StopWatchTimerDisplay;

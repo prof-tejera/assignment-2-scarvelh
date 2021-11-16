@@ -1,7 +1,5 @@
 import {StopWatchTimerDisplay} from "../generic/TimerDisplay";
 import StopWatchButtons from "../generic/StopWatchButtons";
-
-
 import {CountProvider} from "../../mycontext/MyContexts";
 import ReactDOM from "react-dom";
 import {ThemeContext, ThemeProvider} from "../../mycontext/MyThemeContexts";
