@@ -24,7 +24,7 @@ class Button extends Component {
 
         return (
             <Container onClick={() => this.props.onClick(this.props.value)} text={this.props.text}
-                       style={this.props.style} disabled={this.props.disabled}>
+                       style={this.props.style} disabled={this.props.disabled} id={this.props.id}>
 
                 {this.props.value}
                 {this.props.text}

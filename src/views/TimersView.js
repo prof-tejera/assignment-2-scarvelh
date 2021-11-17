@@ -36,7 +36,7 @@ class TimersView extends Component {
 
   handleTimerClick = (timerType) => {
 
-    console.log("I am click" + timerType);
+    //console.log("I am click" + timerType);
     //this.setState({ timerTypeValues: this.state.timerTypeValues = timerType });
     this.setState({ timerTypeValues: timerType });
   };
