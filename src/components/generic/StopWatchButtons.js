@@ -136,6 +136,11 @@ export const StopWatchButtonsCountDown = () => {
     //const {roundedbuttons} = React.useContext(ThemeContext);
     const {roundedbuttons, counterdisplay, setCounterDisplay} = React.useContext(ThemeContext)
     const [intervalId, setIntervalId] = useState(0);
+    //--------------Save Previous values ---------------------------
+    const [previousseconds, setPreviousSeconds] = useState(0);
+    const [previousminutes, setPreviousMintues] = useState(0);
+    const [previoushours, setPreviousHours] = useState(0);
+    const [paused, setPaused] = useState(false)
 
     //if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
     if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && originalrepeat > repeat) {
@@ -187,23 +192,25 @@ export const StopWatchButtonsCountDown = () => {
                         disabled={true} style={roundedbuttons}/>
 
                 <Button text={"Start"} onClick={() => {
-                    /*setFastForward(fastforward => false);
-                    setSeconds(seconds => originalseconds);
-                    setHours(hours => originalhours);
-                    setMinutes(minutes => originalminutes);
-                    setRepeat(repeat => 0);*/
-
-
-                    if (!onstart) {
-                        setFastForward(fastforward => false);
+                    setFastForward(fastforward => false);
+                    if (paused) {
+                        setSeconds(seconds => previousseconds);
+                        setHours(hours => previoushours);
+                        setMinutes(minutes => previousminutes);
+                    } else {
                         setSeconds(seconds => originalseconds);
                         setHours(hours => originalhours);
                         setMinutes(minutes => originalminutes);
-                        setRepeat(repeat => 0);
+
+
+                    }
+                    setRepeat(repeat => 0);
+                    if (!onstart) {
+
                         //console.log(seconds);
                         setIntervalId(setInterval(() => {
                             // console.log("interval" + seconds);
-                            const calcsecs = convertToSeconds(hours, minutes, seconds);
+
                             setSeconds(seconds => seconds - 1)
                             //setCounterDisplay(counterdisplay => "green")
                             //console.log("Seconds <> " + seconds);
@@ -220,6 +227,10 @@ export const StopWatchButtonsCountDown = () => {
                         disabled={"true"} style={roundedbuttons} id="sButton"/>
 
                 <Button text={"Stop"} onClick={() => {
+                    setPaused(paused => true);
+                    setPreviousSeconds(previousseconds => seconds);
+                    setPreviousMintues(previousminutes => minutes);
+                    setPreviousHours(previoushours => hours);
                     clearInterval(intervalId);
                     //setInterval(intervalId => null);
                     setOnStart(onstart => false)
@@ -291,7 +302,11 @@ export const StopWatchButtonsCountDownTabata = () => {
         setFastForward,
     } = useContext(CountDownTabataContext);
     const {roundedbuttons, counterdisplay, setCounterDisplay} = React.useContext(ThemeContext)
-
+//--------------Save Previous values ---------------------------
+    const [previousseconds, setPreviousSeconds] = useState(0);
+    const [previousminutes, setPreviousMintues] = useState(0);
+    const [previoushours, setPreviousHours] = useState(0);
+    const [paused, setPaused] = useState(false)
     const [intervalId, setIntervalId] = useState(0);
     const toddleworkout = workoutperiod === "Workout" ? "Resting" : "Workout";
     //if (hours === 0 && minutes === 0 && seconds === 0 && onstart && intervalId !== null && repeat >= 0) {
@@ -374,10 +389,19 @@ export const StopWatchButtonsCountDownTabata = () => {
 
 
                 <Button text={"Start"} onClick={() => {
-                    setFastForward(fastforward => false);
+                    if (paused) {
+                        setSeconds(seconds => previousseconds);
+                        setHours(hours => previoushours);
+                        setMinutes(minutes => previousminutes);
+                    } else {
+                        setSeconds(seconds => originalseconds);
+                        setHours(hours => originalhours);
+                        setMinutes(minutes => originalminutes);
+                    }
+                    /*setFastForward(fastforward => false);
                     setSeconds(seconds => originalseconds);
                     setHours(hours => originalhours);
-                    setMinutes(minutes => originalminutes);
+                    setMinutes(minutes => originalminutes);*/
                     setRepeat(repeat => 0);
 
                     if (!onstart) {
@@ -394,8 +418,6 @@ export const StopWatchButtonsCountDownTabata = () => {
                         setReset(reset => false);
                         setCounterDisplay(counterdisplay => myColors["yellow-green"])
                     }
-
-
                 }
                 }
                         disabled={true} style={roundedbuttons} id="idStopWatchTabataButton"/>
@@ -403,10 +425,13 @@ export const StopWatchButtonsCountDownTabata = () => {
                 <Button text={"Stop"} onClick={() => {
 
                     // initialize the resting values
-                    setSecondsRest(secondsrest => originalsecondsrest);
-                    setHoursRest(hoursrest => originalhoursrest);
-                    setMinutesRest(minutesrest => originalminutesrest)
-
+                    /* setSecondsRest(secondsrest => originalsecondsrest);
+                     setHoursRest(hoursrest => originalhoursrest);
+                     setMinutesRest(minutesrest => originalminutesrest)*/
+                    setPaused(paused => true);
+                    setPreviousSeconds(previousseconds => seconds);
+                    setPreviousMintues(previousminutes => minutes);
+                    setPreviousHours(previoushours => hours);
 
                     clearInterval(intervalId);
                     setIntervalId(intervalId => null);
