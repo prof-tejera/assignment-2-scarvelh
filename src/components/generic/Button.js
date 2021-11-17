@@ -3,9 +3,12 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const Container = styled.div`
-  padding: 10px;
+  // removed on 11/16/2021
+  //padding: 10px;
+  
   //border: 2px solid blue;
-  width: 60px;
+ // width: 60px;
+  width: auto;
   right: 0;
   bottom: 0;
   align-items: center;

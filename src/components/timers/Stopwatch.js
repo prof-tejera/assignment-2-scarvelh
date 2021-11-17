@@ -10,7 +10,7 @@ import {Container} from "../../utils/helpers";
 const ButtonPosition = {
     /* The size of the buttons passed */
     fontSize: "20px",
-    borderRadius: "20%"
+   // borderRadius: "20%"
 
 };
 

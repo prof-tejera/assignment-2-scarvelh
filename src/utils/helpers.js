@@ -22,11 +22,13 @@ export function getIntervalTimer(myFunction) {
 }
 // build component Container for 'StopWatch' 'CountDown' and 'XY' types of stop watches
 export const Container = styled.div`
-  width: auto;
+  width: auto; 
+  //width:400px;
   height: auto;
   border-radius: 20%;
   align-items: center;
   padding-bottom: 30px;
+  // removed on 11/16/2021
   padding-left: 40px;
   /*---------- automation  ------------ */
   animation: shake 1s;
