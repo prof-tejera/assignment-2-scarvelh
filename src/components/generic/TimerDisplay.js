@@ -22,6 +22,7 @@ let timerFormat = {
     border: "1px solid black"
 };
 
+// function handle blinking effect
 function blinkingEffect() {
     return keyframes`
       50% {
@@ -29,40 +30,46 @@ function blinkingEffect() {
       }
     `;
 }
-const blinkingRedEffect={
-   color: "red"
+
+// Set blinking effect color to red
+const blinkingRedEffect = {
+    color: "red"
 }
+// handle the blink animation
 const AnimatedComponent = styled.div`
   animation: ${blinkingEffect} 1s linear infinite;
-  
+
 `;
 
 ///===================================================StopWatch Timer Display=================================================
 export function StopWatchTimerDisplay() {
-    // const { hrs, mins, secs } = props;
+    // get information from context
     const {hours, minutes, seconds, setSeconds, onstart, fastforward} = useContext(StopContext);
-
+    // get information from context
     let {counterdisplay} = React.useContext(ThemeContext)
+    // convert the time  to second, minutes and hours
     let convertSeconds = secondsToTime(seconds)
 
-    // const condition  =hours === 0 && seconds === 0 && minutes === 0;
+    // change background color
 
 
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
-
+        // change background
         let name = document.getElementById('timerID');
         name.style.backgroundColor = counterdisplay;
 
     }
+    // change fast forward display to congratulate the display
     if (fastforward) {
         return (
             <AnimatedComponent id="timerID">
 
-                <h1 style={{color:"red"}}> Congratulations workout completed!</h1>
+                <h1 style={{color: "red"}}> Congratulations workout completed!</h1>
 
             </AnimatedComponent>
         );
     } else {
+        // return the regular timer display if fast fast forward is not selected
         return (
 
             <div style={timerFormat} id="timerID">
@@ -84,7 +91,7 @@ export function StopWatchTimerDisplay() {
 
 ///===================================================CountDown and XY Timer Display=================================================
 export function StopWatchTimerDisplayCountDown() {
-
+    // get information from context storage
     let {
         hours,
         minutes,
@@ -104,11 +111,13 @@ export function StopWatchTimerDisplayCountDown() {
         fastforward,
         setFastForward
     } = useContext(CountDownContext);
+    // get display theme from theme context
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
-
+    // convert hour + minutes + seconds
     const calcsecs = convertToSeconds(hours, minutes, seconds);
+    // convert the number of seconds to  hour and minutes and seconds for the display
     const convertSeconds = secondsToTime(calcsecs);
-
+    // set the second minutes and hours if it goes into negative values set the values back to '0'
     if ((convertSeconds.seconds < 0 || convertSeconds.minutes < 0 || convertSeconds.hours < 0) /*&& !onstart*/) {
         convertSeconds.seconds = 0;
         convertSeconds.minutes = 0;
@@ -116,24 +125,27 @@ export function StopWatchTimerDisplayCountDown() {
         setCounterDisplay(counterdisplay => myColors["eggshell-white"])
 
     }
+    // set values to '0' wired timing issue
     if (!reset && seconds !== 0 && hours !== 0 && minutes !== 0) {
         convertSeconds.seconds = 0;
         convertSeconds.seconds = 0;
         convertSeconds.hours = 0;
     }
-
+    //  change color of timer display
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
 
         let name = document.getElementById('timerCountDownID');
         name.style.backgroundColor = counterdisplay;
     }
+    // change the number display to congratulation
     if (fastforward) {
         return (
             <AnimatedComponent id="timerCountDownID">
-                <h1 style={{color:"red"}}> Congratulations workout completed!</h1>
+                <h1 style={{color: "red"}}> Congratulations workout completed!</h1>
             </AnimatedComponent>
         );
     } else {
+        //  Display the regular display
         return (
 
             <div style={timerFormat} id="timerCountDownID">
@@ -148,7 +160,6 @@ export function StopWatchTimerDisplayCountDown() {
       </span>
             </div>
 
-
         );
 
     }
@@ -156,7 +167,7 @@ export function StopWatchTimerDisplayCountDown() {
 
 ///===================================================Tabata Timer Display=================================================
 export function StopWatchTimerDisplayTabataCountDown() {
-
+// get information from provider context for the Tabata display
     let {
         hours,
         minutes,
@@ -181,11 +192,14 @@ export function StopWatchTimerDisplayTabataCountDown() {
         fastforward,
 
     } = useContext(CountDownTabataContext);
+    // get information from theme context
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
+    // convert hour+minutes+ seconds  to seconds
     const calcsecs = convertToSeconds(hours, minutes, seconds);
+    // convert seconds in hour minutes seconds  for the stopwatch display.
     const convertSeconds = secondsToTime(calcsecs);
 
-    if ((convertSeconds.seconds < 0 || convertSeconds.minutes < 0 || convertSeconds.hours < 0) /*&& !onstart*/) {
+    if ((convertSeconds.seconds < 0 || convertSeconds.minutes < 0 || convertSeconds.hours < 0)) {
         convertSeconds.seconds = 0;
         convertSeconds.minutes = 0;
         convertSeconds.hours = 0;
@@ -196,13 +210,16 @@ export function StopWatchTimerDisplayTabataCountDown() {
         let name = document.getElementById('timerTabataID');
         name.style.backgroundColor = counterdisplay;
     }
+    // fast forward display congratulation message
     if (fastforward) {
         return (
             <AnimatedComponent id="timerTabataID">
-                <h1 style={{color:"red"}}> Congratulations workout completed!</h1>
+                <h1 style={{color: "red"}}> Congratulations workout completed!</h1>
             </AnimatedComponent>
         );
+
     } else {
+        // display the regular
         return (
 
             <div style={timerFormat} id="timerTabataID">

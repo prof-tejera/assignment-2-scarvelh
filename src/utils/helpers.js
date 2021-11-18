@@ -8,18 +8,16 @@ import styled from "styled-components";
 export function convertToSeconds(hours, minutes, seconds) {
  // Calculated the number of seconds
   let calculated_seconds = Math.floor(seconds);
+  // Calulate the number of minutes
   let calculated_minutes = Math.floor((minutes * 60));
+  // Calculate the number of hours
   let calulated_hours = Math.floor((hours * 60 * 60))
+  // add hour+ minutes + seconds together
   let total_seconds = Math.floor((calculated_seconds + calculated_minutes + calulated_hours))
- // return the number if seconds for conversion
+ // return total number of seconds
   return total_seconds;
 }
 
-// interval timer used for stopwatches
-export function getIntervalTimer(myFunction) {
-
-  return setInterval(myFunction, 1000);
-}
 // build component Container for 'StopWatch' 'CountDown' and 'XY' types of stop watches
 export const Container = styled.div`
   width: auto; 
@@ -50,7 +48,8 @@ export const Container = styled.div`
   box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16), 0 4px 6px rgba(0, 0, 0, 0.45);
 
 `;
-// from
+// Originally from from https://www.py4u.net/discuss/283439 made a few modifications
+//  calculate the number of hours, minutes, and second from input of seconds
 export function secondsToTime(secs)
 {
   var hours = Math.floor(secs / (60 * 60));
@@ -66,9 +65,19 @@ export function secondsToTime(secs)
     "minutes": minutes,
     "seconds": seconds
   };
+  // return the timer object above
   return timerObject;
 }
-// yellow grren
+
+/**
+ * Stop watch screen colors
+ * yellow-green (when the start button have been clicked)
+ * orange-yellow ( when the stop button have been clicked)
+ * eggshell-white (The default color for the sop watch screens)
+ *
+ *
+ * @type {{resting: string, "yellow-green": string, "orange-yellow": string, "eggshell-white": string}}
+ */
 
 export const myColors = {"yellow-green" : "#43a876",
 "orange-yellow": "#f5bd1f",

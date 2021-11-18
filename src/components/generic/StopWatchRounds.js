@@ -1,9 +1,15 @@
 import {CountDownContext, CountDownTabataContext} from "../../mycontext/MyContexts";
 import React, {useContext} from "react";
 
+/**
+ * Let the user know the round that they are on
+ * Please note that "Rounds is directed ties to my variable 'repeat' and function 'setReap'
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function StopWatchRounds() {
     // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
-    let {
+ let {
 
         repeat,
         setRepeat,
@@ -11,15 +17,16 @@ function StopWatchRounds() {
         setOriginalRepeat,
 
     } = useContext(CountDownContext)
-    //useEffect(() => {
+    // had some sync issues this fixes it.
     if (repeat <= 0) {
         repeat = 0;
     }
+    // had some sync issues this fixes it.
     if (repeat > originalrepeat) {
 
         setRepeat(repeat => originalrepeat)
     }
-    // });
+    // return the number of rounds output
     return (
 
         <div>
@@ -29,8 +36,15 @@ function StopWatchRounds() {
     );
 }
 
+/**
+ * Display the number of rounds for  the stopwatch Tabata time
+ * // Differs from the other timer I added another output "Workout" or "Resting" to illustrate
+ * what current period you are in
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export function StopWatchRoundsTabata() {
-    // Declare a new state variable, which we'll call "count"  const [count, setCount] = useState(0);
+    // Get the countdown Tabata context
     let {
 
         repeat,
@@ -40,16 +54,16 @@ export function StopWatchRoundsTabata() {
         workoutperiod,
 
     } = useContext(CountDownTabataContext)
-    //useEffect(() => {
+    // had some sync issues this fixes it.
     if (repeat <= 0) {
         repeat = 0;
     }
-
+// had some sync issues this fixes it.
     if (repeat > originalrepeat) {
 
         setRepeat(repeat => originalrepeat)
     }
-    // });
+
     return (
 
         <div>

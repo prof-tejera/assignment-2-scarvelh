@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {myColors} from "../utils/helpers";
-
+// styling for thje different stop watches
 const themes = {
     customStylingStopWatch: {backgroundColor: "#add8e6", alignItems: "center", cursor: "pointer" },
 
@@ -20,10 +20,10 @@ const initialState = {
     roundedbuttons: themes.roundedButtons,
     counterdisplay: themes.counterDisplay,
 }
-
+// create theme context
 const ThemeContext = React.createContext(initialState);
 
-
+// create theme providers
 function ThemeProvider({children}) {
     const [themestopwatch, setThemeStopWatch] = useState(themes.customStylingStopWatch);
     const [themecountdown, setThemeCountDown] = useState(themes.customStylingCountDown);

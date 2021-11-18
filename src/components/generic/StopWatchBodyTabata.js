@@ -67,7 +67,11 @@ const minutesRestInput = React.createRef();
 const secondsRestInput = React.createRef();
 
 const repeatInput = React.createRef();
-
+/**
+ *  The body of the StopWatch Tabatya
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const StopWatchBodyTabata = () => {
     const {
         seconds,
@@ -100,22 +104,10 @@ export const StopWatchBodyTabata = () => {
         originalminutes,
         originalminutesrest,
     } = useContext(CountDownTabataContext)
-   const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
-    // reset the selected values
-    if (reset) {
-        hoursInput.current.value = originalhours;
-        minutesInput.current.value = originalminutes;
-        secondsInput.current.value = originalseconds;
-        hoursRestInput.current.value = originalhoursrest;
-        minutesRestInput.current.value =originalminutesrest;
-        secondsRestInput.current.value = originalsecondsrest;
-        repeatInput.current.value = originalrepeat;
-        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
-        setReset(reset => false);
-        //-----------------------------------Just Added
+    // get theme context
+    const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
 
-    }
-
+// return the body of the Stop watch Tabata body
     return (
         <>
 
@@ -147,7 +139,7 @@ export const StopWatchBodyTabata = () => {
                 <div style={AlignGrid}>
                     <p>Timer 2 (Rest Hours)</p>
                     <input ref={hoursRestInput} type="number" placeholder={0} name="hours" onChange={(e) => {
-                       // setHours(hours => hours + 1);
+
                         setOriginalHoursRest(originalhoursrest => parseInt(hoursRestInput.current.value));
                     }}
                            min="0" style={customStyleInput}/>
@@ -156,7 +148,6 @@ export const StopWatchBodyTabata = () => {
                            onChange={(e) => {
 
 
-                              // setMinutes(minutes => minutes + 1);
                                setOriginalMinutesRest(originalminutesrest => parseInt(minutesRestInput.current.value));
 
                            }}
@@ -166,7 +157,6 @@ export const StopWatchBodyTabata = () => {
                            onChange={(e) => {
 
 
-                              // setSeconds(seconds => seconds + 1);
                                setOriginalSecondsRest(originalsecondsrest => parseInt(secondsRestInput.current.value))
 
                            }}

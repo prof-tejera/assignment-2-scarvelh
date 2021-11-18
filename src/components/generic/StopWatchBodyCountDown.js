@@ -6,8 +6,14 @@ import {ThemeContext} from "../../mycontext/MyThemeContexts";
 const hoursInput = React.createRef();
 const minutesInput = React.createRef();
 const secondsInput = React.createRef();
-
+/**
+ * This handles the body of the countdown timer
+ *  Functional Component
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const StopWatchBodyCountDown = () => {
+    // get the values from countdown provider context
     const {
         seconds,
         setSeconds,
@@ -27,17 +33,8 @@ const StopWatchBodyCountDown = () => {
         setOriginalHours
     } = useContext(CountDownContext)
     const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
-    // reset the selected values
-    /*if (reset && (seconds <= 0 && minutes <= 0 && hours <= 0)) {
-        hoursInput.current.value = 0;
-        minutesInput.current.value = 0;
-        secondsInput.current.value = originalseconds;
-        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
-        //setOriginalSeconds(originalseconds => 0);
-        //setOriginalMinutes(originalminutes => 0);
-        //setOriginalHours(originalhours => 0);
-        setReset(reset => false);
-    }*/
+
+  // return the values of the body of the CountDown timer
     return (
 
 
