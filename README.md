@@ -55,4 +55,18 @@ For people looking for an additional challenge, we have provided some bonus feat
 
 As you have noticed this repository is empty. To begin this assignment you must copy over all of our files from A1 into this repo. I recommend not copying over `node_modules` and instead re-install here. You can then commit and deploy as usual from this repo.
 
+//============ Added Scarvel Harris=================================
+
+Please Note:  the app is running in a docker environment on one of my test servers.
+Source code have been checked in to the homework site.
+Open [http://74.208.183.29:3001](http://74.208.183.29:3001)
+like to application running on the test server :
+
+Stop Watch Buttons
+Done - is used for the function fast forward
+Start - is used to start the Application. Once the application is started the text on
+the button changes to 'Resume'.
+Stop - stop the stopwatch. This button is the PAUSE Button
+
+Reset - The reset button reset the stopwatch to it original state or values.
 

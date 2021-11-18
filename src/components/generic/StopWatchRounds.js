@@ -14,9 +14,7 @@ function StopWatchRounds() {
         repeat,
         setRepeat,
         originalrepeat,
-        setOriginalRepeat,
-
-    } = useContext(CountDownContext)
+ } = useContext(CountDownContext)
     // had some sync issues this fixes it.
     if (repeat <= 0) {
         repeat = 0;
@@ -50,7 +48,7 @@ export function StopWatchRoundsTabata() {
         repeat,
         setRepeat,
         originalrepeat,
-        setOriginalRepeat,
+
         workoutperiod,
 
     } = useContext(CountDownTabataContext)
