@@ -423,10 +423,10 @@ export const StopWatchButtonsCountDownTabata = () => {
 
                         console.log(seconds);
                         setIntervalId(setInterval(() => {
-                            //console.log("interval" + seconds);
-                            const calcsecs = convertToSeconds(hours, minutes, seconds);
+
+
                             setSeconds(seconds => seconds - 1)
-                            //setCounterDisplay(counterdisplay => "green")
+
 
                         }, 1000))
                         setOnStart(onstart => true);
@@ -459,26 +459,24 @@ export const StopWatchButtonsCountDownTabata = () => {
                     // Put everything back to it original values
                     setFastForward(fastforward => false);
                     clearInterval(intervalId);
+
                     // reset to the original values
                     setSeconds(seconds => originalseconds);
                     setHours(hours => originalhours);
                     setMinutes(minutes => originalminutes);
+                    setInterval(intervalId => null);
                     setSecondsRest(secondsrest => originalsecondsrest);
                     setMinutesRest(minutesrest => originalminutesrest);
                     setHoursRest(hoursrest => originalhoursrest);
-                    setRepeat(repeat => originalrepeat);
-                    setMinutes(minutes => 0);
-
-                    setSeconds(seconds => 0);
-                    setHours(hours => 0);
-
-                    setInterval(intervalId => null);
+                    //setRepeat(repeat => originalrepeat);
                     setOnStart(onstart => false);
                     setReset(reset => true);
                     setCounterDisplay(counterdisplay => myColors["eggshell-white"]);
                     let changeText = document.getElementById('idStopWatchTabataButton');
                     changeText.innerHTML = "Start";
-                    setRepeat(repeat => 0);
+                    setRepeat(repeat =>1);
+                    setWorkOutPeriod(workoutperiod => "Workout")
+                    setPaused(paused => false)
                 }} style={roundedbuttons}/>
             </div>
         </Container>
