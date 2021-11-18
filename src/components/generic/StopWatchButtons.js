@@ -270,7 +270,8 @@ export const StopWatchButtonsCountDown = () => {
                     setCounterDisplay(counterdisplay => myColors["eggshell-white"]);
                     let changeText = document.getElementById('sButton');
                     changeText.innerHTML = "Start";
-
+                    setRepeat(repeat =>0);
+                    setPaused(paused => false)
                 }} style={roundedbuttons}/>
             </div>
 
