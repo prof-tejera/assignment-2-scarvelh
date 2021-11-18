@@ -2,8 +2,8 @@ version: '3.3'
 
 services:
 
-  assignment1-app:
-    container_name: assignment1-app
+  assignment2-app:
+    container_name: assignment2-app
     build:
       context: .
       dockerfile: Dockerfile
