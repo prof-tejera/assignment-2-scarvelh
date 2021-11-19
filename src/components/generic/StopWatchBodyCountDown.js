@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 import {CountDownContext} from "../../mycontext/MyContexts";
 import {customStyleInput} from "../timers/Countdown";
-import {ThemeContext} from "../../mycontext/MyThemeContexts";
 
 const hoursInput = React.createRef();
 const minutesInput = React.createRef();
@@ -15,24 +14,12 @@ const secondsInput = React.createRef();
 const StopWatchBodyCountDown = () => {
     // get the values from countdown provider context
     const {
-        seconds,
-        setSeconds,
-        minutes,
-        setMinutes,
-        hours,
-        setHours,
-        reset,
-        setReset,
-        onstart,
-        setOnStart,
-        originalseconds,
-        orginalhours,
-        orginalminutes,
+
         setOriginalMinutes,
         setOriginalSeconds,
         setOriginalHours
     } = useContext(CountDownContext)
-    const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
+
 
   // return the values of the body of the CountDown timer
     return (

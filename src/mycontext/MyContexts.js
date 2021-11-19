@@ -22,10 +22,9 @@ export const StopContext = React.createContext({
 
 // Create Context Provider
 export function CountProvider({children}) {
-
     const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [hours, setHours] = useState(0);
+    const [minutes] = useState(0);
+    const [hours] = useState(0);
     const [onstart, setOnStart] = useState(false);
     const [fastforward, setFastForward] = useState(false);
     //   const [button]
@@ -194,9 +193,9 @@ export function CountDownTabataProvider({children}) {
     const [originalminutes, setOriginalMinutes] = useState(0);
     const [originalhours, setOriginalHours] = useState(0);
     // rest Timer information
-    const [secondsrest, setSecondsRest] = useState(0);
-    const [minutesrest, setMinutesRest] = useState(0);
-    const [hoursrest, setHoursRest] = useState(0);
+    const [, setSecondsRest] = useState(0);
+    const [, setMinutesRest] = useState(0);
+    const [, setHoursRest] = useState(0);
     const [originalsecondsrest, setOriginalSecondsRest] = useState(0);
     const [originalminutesrest, setOriginalMinutesRest] = useState(0);
     const [originalhoursrest, setOriginalHoursRest] = useState(0);

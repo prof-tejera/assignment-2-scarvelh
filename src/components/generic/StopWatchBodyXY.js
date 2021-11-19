@@ -13,39 +13,28 @@ const StopWatchBodyXY = () => {
     // get countdown Context
     const {
         seconds,
-        setSeconds,
         minutes,
-        setMinutes,
         hours,
-        setHours,
         reset,
         setReset,
-        onstart,
-        setOnStart,
-        repeat,
-        setRepeat,
-        originalseconds,
-        orginalminutes,
-        originalhours,
         setOriginalHours,
         setOriginalSeconds,
         setOriginalMinutes,
-        originalrepeat,
         setOriginalRepeat,
 
     } = useContext(CountDownContext)
     // get values from them context
-    const {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
+    const {setCounterDisplay} = React.useContext(ThemeContext);
     // reset the selected values
     if (reset && (seconds <= 0 && minutes <= 0 && hours <= 0)) {
         hoursInput.current.value = 0;
         minutesInput.current.value = 0;
         secondsInput.current.value = 0;
         repeatInput.current.value = 0;
-        setReset(reset => false);
-        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
-        setReset(reset => false);
-        setOriginalRepeat(originalrepeat => 0);
+        setReset(() => false);
+        setCounterDisplay(() => myColors["eggshell-white"])
+        setReset(() => false);
+        setOriginalRepeat(() => 0);
 
         //-----------------------------------Just Added
 
@@ -54,33 +43,33 @@ const StopWatchBodyXY = () => {
     return (
         <>
             <p>(Hours)</p>
-            <input ref={hoursInput} type="number" placeholder={0} name="hours" onChange={(e) => {
+            <input ref={hoursInput} type="number" placeholder={0} name="hours" onChange={() => {
 
 
-                setOriginalHours(originalhour => hoursInput.current.val);
+                setOriginalHours(() => hoursInput.current.val);
             }} min="0"
                    style={customStyleInput}/>
             <p>(Minutes)</p>
-            <input ref={minutesInput} type="number" placeholder={0} name="minutes" onChange={(e) => {
+            <input ref={minutesInput} type="number" placeholder={0} name="minutes" onChange={() => {
 
 
-                setOriginalMinutes(originalminutes => minutesInput.current.value);
+                setOriginalMinutes(() => minutesInput.current.value);
 
             }}
                    min="0" style={customStyleInput}/>
             <p>(Seconds)</p>
-            <input ref={secondsInput} type="number" placeholder={0} name="seconds" onChange={(e) => {
+            <input ref={secondsInput} type="number" placeholder={0} name="seconds" onChange={() => {
 
 
-                setOriginalSeconds(originalseconds => secondsInput.current.value)
+                setOriginalSeconds(() => secondsInput.current.value)
 
             }}
                    min="0" style={customStyleInput}/>
             <p>Repeat number of Times</p>
-            <input ref={repeatInput} type="number" placeholder={0} name="numTimes" onChange={(e) => {
+            <input ref={repeatInput} type="number" placeholder={0} name="numTimes" onChange={() => {
 
                 // set original value repeat(number of rounds)
-                setOriginalRepeat(originalrepeat => repeatInput.current.value);
+                setOriginalRepeat(() => repeatInput.current.value);
             }}
                    min="0" style={customStyleInput}/>
 

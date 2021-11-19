@@ -2,8 +2,7 @@ import React, {useContext} from "react";
 import {CountDownContext, CountDownTabataContext, StopContext} from "../../mycontext/MyContexts";
 import {convertToSeconds, myColors, secondsToTime} from "../../utils/helpers";
 import {ThemeContext} from "../../mycontext/MyThemeContexts";
-import {keyframes} from "styled-components";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
 let timerFormat = {
     margin: "20px",
@@ -31,20 +30,17 @@ function blinkingEffect() {
     `;
 }
 
-// Set blinking effect color to red
-const blinkingRedEffect = {
-    color: "red"
-}
+
 // handle the blink animation
 const AnimatedComponent = styled.div`
-  animation: ${blinkingEffect} 1s linear infinite;
+  animation: ${{blinkingEffect}} 1s linear infinite;
 
 `;
 
 ///===================================================StopWatch Timer Display=================================================
 export function StopWatchTimerDisplay() {
     // get information from context
-    const {hours, minutes, seconds, setSeconds, onstart, fastforward} = useContext(StopContext);
+    const {seconds, fastforward} = useContext(StopContext);
     // get information from context
     let {counterdisplay} = React.useContext(ThemeContext)
     // convert the time  to second, minutes and hours
@@ -96,20 +92,11 @@ export function StopWatchTimerDisplayCountDown() {
         hours,
         minutes,
         seconds,
-        setSeconds,
-        setMinutes,
-        setHours,
-        setRepeat,
-        repeat,
-        onstart,
-        setOnStart,
-        setReset,
+
         reset,
-        originalseconds,
-        originalminutes,
-        originalhours,
+
         fastforward,
-        setFastForward
+
     } = useContext(CountDownContext);
     // get display theme from theme context
     let {counterdisplay, setCounterDisplay} = React.useContext(ThemeContext);
@@ -122,7 +109,7 @@ export function StopWatchTimerDisplayCountDown() {
         convertSeconds.seconds = 0;
         convertSeconds.minutes = 0;
         convertSeconds.hours = 0;
-        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
+        setCounterDisplay(() => myColors["eggshell-white"])
 
     }
     // set values to '0' wired timing issue
@@ -172,23 +159,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
         hours,
         minutes,
         seconds,
-        setSeconds,
-        setMinutes,
-        setHours,
-        setRepeat,
-        repeat,
-        onstart,
-        setOnStart,
-        setReset,
-        reset,
-        originalseconds,
-        originalminutes,
-        originalhours,
-        originalsecondsrest,
-        originalminutesrest,
-        originalhoursrest,
-        workoutperiod,
-        setWorkOutPeriod,
+
         fastforward,
 
     } = useContext(CountDownTabataContext);
@@ -203,7 +174,7 @@ export function StopWatchTimerDisplayTabataCountDown() {
         convertSeconds.seconds = 0;
         convertSeconds.minutes = 0;
         convertSeconds.hours = 0;
-        setCounterDisplay(counterdisplay => myColors["eggshell-white"])
+        setCounterDisplay(() => myColors["eggshell-white"])
     }
     if (counterdisplay.backgroundColor !== myColors["eggshell-white"]) {
 
