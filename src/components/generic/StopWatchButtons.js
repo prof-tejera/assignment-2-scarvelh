@@ -415,7 +415,7 @@ export const StopWatchButtonsCountDownTabata = () => {
                         setIntervalId(setInterval(() => {
 
 
-                            setSeconds(() => seconds - 1)
+                            setSeconds(seconds => seconds - 1)
 
 
                         }, 1000))
