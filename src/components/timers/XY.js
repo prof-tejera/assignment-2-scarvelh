@@ -3,7 +3,6 @@ import {StopWatchTimerDisplayCountDown} from "../generic/TimerDisplay";
 import {StopWatchButtonsCountDown} from "../generic/StopWatchButtons";
 import {Container} from "../../utils/helpers";
 import StopWatchBodyXY from "../generic/StopWatchBodyXY";
-import ReactDOM from "react-dom";
 import {CountDownProvider} from "../../mycontext/MyContexts";
 import {ThemeContext, ThemeProvider} from "../../mycontext/MyThemeContexts";
 import StopWatchRounds from "../generic/StopWatchRounds";
@@ -40,11 +39,6 @@ function App() {
     );
 }
 
-ReactDOM.render(
-    <App/>,
-
-    document.getElementById('root')
-);
 
 
 export default App;

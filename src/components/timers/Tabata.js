@@ -1,7 +1,6 @@
 import React from "react";
 import {StopWatchTimerDisplayTabataCountDown} from "../generic/TimerDisplay";
 import {StopWatchButtonsCountDownTabata} from "../generic/StopWatchButtons";
-import ReactDOM from "react-dom";
 
 import {CountDownTabataProvider} from "../../mycontext/MyContexts";
 import StopWatchBodyTabata from "../generic/StopWatchBodyTabata";
@@ -71,11 +70,7 @@ function App() {
     );
 }
 
-ReactDOM.render(
-    <App/>,
 
-    document.getElementById('root')
-);
 
 
 export default App;
