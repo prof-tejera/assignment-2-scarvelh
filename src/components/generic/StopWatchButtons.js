@@ -36,7 +36,7 @@ export const StopWatchButtons = () => {
     const {roundedbuttons, setCounterDisplay} = React.useContext(ThemeContext)
     // get the stopwatch provider context
     const {
-        seconds,
+
         setSeconds,
         onstart,
         setOnStart,
