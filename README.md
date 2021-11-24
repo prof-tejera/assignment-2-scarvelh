@@ -55,4 +55,45 @@ For people looking for an additional challenge, we have provided some bonus feat
 
 As you have noticed this repository is empty. To begin this assignment you must copy over all of our files from A1 into this repo. I recommend not copying over `node_modules` and instead re-install here. You can then commit and deploy as usual from this repo.
 
+_**//============ Added by Scarvel Harris=================================**_
 
+**_Please Note: The stopwatch applications are running in a docker environment on one of my test servers.
+Source code have been checked in to the homework site._**
+Open [http://74.208.183.29:3000](http://74.208.183.29:3000)
+
+
+_**Stop Watch Buttons**_
+
+Done - is used for the function fast-forward
+Start - is used to start the Application. Once the application is started the text on
+the button changes to 'Resume'.
+Stop - stop the stopwatch. This button is the PAUSE Button
+
+Reset - The reset button reset the stopwatch to it original state or values.
+
+**_Each stopwatch component consist of 3 main parts._**
+
+1. _Display_ - show the hour minutes and seconds
+2. _Body_ - each component have it own body (StopWatchBody...)
+3. _Stop Watch Button_ - consist of 4 button(Done,Start/Resume, Stop/pause and Reset
+
+**Done**: Fast forward feature Congratulating user for finishing workout
+
+**Start**: Start time button when you click on 'Stop' button the 'Start' changes to 'Resume'
+
+**Stop**: This button is used to pause the stop watch
+
+**Reset**: This button reset the timer back to it original values.
+
+**_The javascript file "TimerDisplay.js" handles the display for the different timers._**
+
+If you look at the javascript file  you will see three functional component
+1) _StopWatchTimerDisplay_ - Handles the display for the regular stop watch.
+2) _StopWatchTimerDisplayCountDown_ - Handles the display for CountDown and XY stop watches.
+3) _StopWatchTimerDisplayTabataCountDown_ - Handles the display for the Tabata stop watch
+
+**_I could have combined them together into one file for the display(TimerDisplay.js) but it was
+become to complicated, so I decided to separate and decouple them._**
+
+When all workouts are completed, the user is congratulated with "Congratulation workout Completed!" flashing
+at the top where the stop watch timer display section
